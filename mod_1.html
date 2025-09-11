@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun English for Kids: Senses & Feelings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F9FF; /* A soft, light blue background */
+        }
+        .content-section, .practice-exercise {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .tile {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .vocab-card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .vocab-card:hover {
+            transform: scale(1.05);
+        }
+        .correct-answer {
+            color: #22c55e; /* green-500 */
+            font-weight: bold;
+        }
+        .incorrect-answer {
+            color: #ef4444; /* red-500 */
+            font-weight: bold;
+        }
+        .practice-nav-btn {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            color: #4b5563; /* gray-600 */
+            font-weight: 500;
+            transition: color 0.3s, border-color 0.3s;
+            border-bottom: 4px solid transparent;
+            white-space: nowrap;
+        }
+        .practice-nav-btn.active-btn {
+            color: #f59e0b; /* amber-500 */
+            border-bottom-color: #f59e0b;
+        }
+        .practice-nav-container {
+            display: flex;
+            overflow-x: auto;
+            border-bottom: 2px solid #e5e7eb; /* gray-200 */
+            margin-bottom: 1.5rem;
+        }
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .quiz-option:hover {
+            background-color: #fef3c7; /* amber-100 */
+        }
+        .quiz-option.correct {
+             background-color: #dcfce7; /* green-100 */
+             border-color: #22c55e; /* green-500 */
+        }
+         .quiz-option.incorrect {
+             background-color: #fee2e2; /* red-100 */
+             border-color: #ef4444; /* red-500 */
+        }
+    </style>
+</head>
+<body class="bg-sky-50 text-gray-800">
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+
+        <!-- Header Section -->
+        <header class="relative rounded-2xl overflow-hidden text-white text-center p-12 md:p-20 mb-12 bg-gradient-to-r from-sky-400 to-blue-600">
+             <div class="absolute inset-0 bg-cover bg-center z-0 opacity-20" style="background-image: url('https://placehold.co/1200x400/60a5fa/ffffff?text=Hello!');"></div>
+            <div class="relative z-10">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Our Senses & Feelings</h1>
+                <p class="text-lg md:text-2xl">Learn new words and play fun games!</p>
+            </div>
+        </header>
+
+        <!-- Navigation Tiles -->
+        <section id="navigation" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- Learn the Words Tile -->
+            <div onclick="showSection('explanation')" class="tile cursor-pointer bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center">
+                <div class="text-6xl mb-4">📚</div>
+                <h2 class="text-2xl font-bold text-sky-600 mb-2">Learn the Words</h2>
+                <p class="text-gray-600">Learn about senses and feelings.</p>
+            </div>
+            <!-- Fun Games Tile -->
+            <div onclick="showSection('practice')" class="tile cursor-pointer bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center">
+                <div class="text-6xl mb-4">🎮</div>
+                <h2 class="text-2xl font-bold text-amber-500 mb-2">Fun Games</h2>
+                <p class="text-gray-600">Play games to practice.</p>
+            </div>
+            <!-- Senses Challenge Tile -->
+            <div onclick="showSection('mastery')" class="tile cursor-pointer bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center">
+                <div class="text-6xl mb-4">🌟</div>
+                <h2 class="text-2xl font-bold text-violet-500 mb-2">Senses Challenge</h2>
+                <p class="text-gray-600">Test your knowledge!</p>
+            </div>
+        </section>
+
+        <!-- Content Sections Container -->
+        <main id="content-container">
+
+            <!-- Explanation Section -->
+            <section id="explanation" class="content-section bg-white p-8 rounded-2xl shadow-md border border-gray-200">
+                <h2 class="text-3xl font-bold text-sky-700 mb-6">Learn About Our Senses</h2>
+                <div id="senses-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Senses cards will be dynamically inserted here -->
+                </div>
+
+                <h2 class="text-3xl font-bold text-sky-700 mt-12 mb-6">Learn About Feelings</h2>
+                <div id="feelings-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feelings cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Practice Section -->
+            <section id="practice" class="content-section bg-white p-8 rounded-2xl shadow-md border border-gray-200">
+                <h2 class="text-3xl font-bold text-amber-600 mb-4">Let's Play a Game!</h2>
+
+                <div class="practice-nav-container">
+                    <button id="btn-ex-1" onclick="showExercise('exercise-1')" class="practice-nav-btn">Match the Sense</button>
+                    <button id="btn-ex-2" onclick="showExercise('exercise-2')" class="practice-nav-btn">What Makes You Happy?</button>
+                </div>
+
+                <div id="exercise-container">
+                    <!-- Exercise 1: Match the Sense -->
+                    <div id="exercise-1" class="practice-exercise">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Game 1: Match the Sense</h3>
+                        <p class="mb-6 text-gray-600">Read the sentence and click the correct picture.</p>
+                        <div class="space-y-6" id="match-sense-container">
+                            <!-- Questions will be dynamically inserted here -->
+                        </div>
+                        <button onclick="checkMatchTheSense()" class="mt-8 bg-amber-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-amber-600 transition text-lg">Check Answers</button>
+                    </div>
+                    
+                    <!-- Exercise 2: What Makes You Happy? -->
+                    <div id="exercise-2" class="practice-exercise">
+                         <h3 class="text-2xl font-semibold text-gray-800 mb-4">Game 2: What Makes You Happy?</h3>
+                        <p class="mb-6 text-gray-600">Read the sentence and choose the correct word.</p>
+                        <div class="space-y-6" id="happy-container">
+                            <!-- Questions will be dynamically inserted here -->
+                        </div>
+                        <button onclick="checkHappyGame()" class="mt-8 bg-amber-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-amber-600 transition text-lg">Check Answers</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mastery Section -->
+            <section id="mastery" class="content-section bg-white p-8 rounded-2xl shadow-md border border-gray-200">
+                <h2 class="text-3xl font-bold text-violet-600 mb-6">Senses Challenge Quiz</h2>
+                 <p class="mb-6 text-gray-600">Test your knowledge! Choose the best answer for each question.</p>
+                <div class="space-y-6" id="mastery-quiz-container">
+                    <!-- Mastery quiz questions will be dynamically inserted here -->
+                </div>
+                <button onclick="checkMasteryQuiz()" class="mt-8 bg-violet-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-violet-600 transition text-lg">Check My Score</button>
+                <div id="mastery-quiz-result" class="mt-6 text-xl font-bold"></div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+        const contentSections = document.querySelectorAll('.content-section');
+        let currentSection = null;
+
+        function showSection(sectionId) {
+            if (currentSection) {
+                currentSection.classList.remove('active');
+            }
+            if (currentSection && currentSection.id === sectionId) {
+                currentSection = null;
+                return;
+            }
+            const newSection = document.getElementById(sectionId);
+            if (newSection) {
+                newSection.classList.add('active');
+                currentSection = newSection;
+                newSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (sectionId === 'practice') {
+                    showExercise('exercise-1');
+                }
+            }
+        }
+        
+        function showExercise(exerciseId) {
+            document.querySelectorAll('.practice-nav-btn').forEach(btn => btn.classList.remove('active-btn'));
+            document.getElementById(`btn-ex-${exerciseId.split('-')[1]}`).classList.add('active-btn');
+            document.querySelectorAll('.practice-exercise').forEach(ex => ex.style.display = 'none');
+            document.getElementById(exerciseId).style.display = 'block';
+        }
+
+        // --- Data for the Website ---
+
+        const senses = [
+            { name: 'Eyes', image: 'https://placehold.co/400x300/3B82F6/FFFFFF?text=👁️', action: 'I can see with my eyes.' },
+            { name: 'Ears', image: 'https://placehold.co/400x300/FBBF24/FFFFFF?text=👂', action: 'I can hear with my ears.' },
+            { name: 'Nose', image: 'https://placehold.co/400x300/F472B6/FFFFFF?text=👃', action: 'I can smell with my nose.' },
+            { name: 'Tongue', image: 'https://placehold.co/400x300/EF4444/FFFFFF?text=👅', action: 'I can taste with my tongue.' },
+            { name: 'Hands', image: 'https://placehold.co/400x300/8B5CF6/FFFFFF?text=✋', action: 'I can touch with my hands.' },
+        ];
+
+        const feelings = [
+            { name: 'Happy', image: 'https://placehold.co/400x300/FBBF24/000000?text=😄' },
+            { name: 'Sad', image: 'https://placehold.co/400x300/60A5FA/FFFFFF?text=😢' },
+            { name: 'Angry', image: 'https://placehold.co/400x300/EF4444/FFFFFF?text=😠' },
+            { name: 'Tired', image: 'https://placehold.co/400x300/9CA3AF/FFFFFF?text=😴' },
+            { name: 'Scared', image: 'https://placehold.co/400x300/A78BFA/FFFFFF?text=😨' }
+        ];
+
+        const matchSenseQuestions = [
+            { sentence: "I can see with my...", options: senses.map(s => s.image), answer: senses[0].name },
+            { sentence: "I can hear with my...", options: senses.map(s => s.image), answer: senses[1].name },
+            { sentence: "I can smell with my...", options: senses.map(s => s.image), answer: senses[2].name },
+            { sentence: "I can taste with my...", options: senses.map(s => s.image), answer: senses[3].name },
+            { sentence: "I can touch with my...", options: senses.map(s => s.image), answer: senses[4].name },
+        ];
+        
+        const happyQuestions = [
+            { sentence: "I'm happy when I ___ the sun.", object: '☀️', options: ['see', 'hear'], answer: 'see'},
+            { sentence: "I'm happy when I ___ my teddy bear.", object: '🧸', options: ['taste', 'touch'], answer: 'touch'},
+            { sentence: "I'm happy when I ___ my dog.", object: '🐶', options: ['smell', 'hear'], answer: 'hear'},
+            { sentence: "I'm happy when I ___ ice cream.", object: '🍦', options: ['taste', 'smell'], answer: 'taste'},
+            { sentence: "I'm happy when I ___ pizza.", object: '🍕', options: ['smell', 'see'], answer: 'smell'},
+        ];
+
+        const masteryQuizQuestions = [
+             { question: "Which part do you use to smell a flower? 🌸", options: [senses[2].image, senses[0].image, senses[1].image], answer: senses[2].name },
+             { question: "How do you feel when you get a present? 🎁", options: [feelings[0].image, feelings[1].image, feelings[2].image], answer: feelings[0].name },
+             { question: "Which part do you use to taste a yummy cake? 🍰", options: [senses[3].image, senses[4].image, senses[2].image], answer: senses[3].name },
+             { question: "You hear a loud noise at night! You feel...", options: [feelings[4].image, feelings[0].image, feelings[3].image], answer: feelings[4].name }
+        ];
+
+        // --- Functions to Populate Content ---
+
+        function populateCards(containerId, cardData, type) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = cardData.map(item => `
+                <div class="vocab-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 text-center">
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover bg-gray-200">
+                    <div class="p-5">
+                        <h3 class="text-2xl font-bold text-gray-800">${item.name}</h3>
+                        ${type === 'senses' ? `<p class="text-gray-600 mt-2">${item.action}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function populateMatchTheSense() {
+            const container = document.getElementById('match-sense-container');
+            container.innerHTML = matchSenseQuestions.map((q, index) => `
+                 <div class="p-5 border-2 border-gray-200 rounded-xl">
+                    <p class="text-2xl font-semibold mb-4 text-center">"${q.sentence}"</p>
+                     <div id="options-match-sense-${index}" class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                        ${q.options.map(imgUrl => {
+                            const senseName = senses.find(s => s.image === imgUrl).name;
+                            return `
+                                <label class="quiz-option flex-col p-2">
+                                    <input type="radio" name="match-sense-${index}" value="${senseName}" class="hidden">
+                                    <img src="${imgUrl}" alt="${senseName}" class="w-full h-24 object-cover rounded-md">
+                                </label>`
+                        }).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function populateHappyGame() {
+            const container = document.getElementById('happy-container');
+            container.innerHTML = happyQuestions.map((q, index) => `
+                <div class="p-5 border-2 border-gray-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-6xl">${q.object}</div>
+                    <p class="text-xl font-semibold text-center sm:text-left flex-1">${q.sentence.replace('___', '<span class="text-amber-500">___</span>')}</p>
+                     <div id="options-happy-${index}" class="flex gap-3">
+                        ${q.options.map(option => `
+                            <label class="quiz-option">
+                                <input type="radio" name="happy-${index}" value="${option}" class="hidden">
+                                <span class="font-semibold text-lg px-4">${option}</span>
+                            </label>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function populateMasteryQuiz() {
+            const container = document.getElementById('mastery-quiz-container');
+            container.innerHTML = masteryQuizQuestions.map((q, index) => `
+                <div class="p-5 border-l-4 border-gray-200 rounded-r-lg bg-gray-50">
+                    <p class="font-semibold text-lg mb-3">${q.question}</p>
+                    <div id="options-mastery-quiz-${index}" class="grid grid-cols-3 gap-3">
+                         ${q.options.map(imgUrl => {
+                            const name = senses.find(s => s.image === imgUrl)?.name || feelings.find(f => f.image === imgUrl)?.name;
+                            return `
+                                <label class="quiz-option flex-col p-2">
+                                    <input type="radio" name="mastery-quiz-${index}" value="${name}" class="hidden">
+                                    <img src="${imgUrl}" alt="${name}" class="w-full h-24 object-cover rounded-md">
+                                </label>`
+                        }).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+
+        // --- Functions to Check Answers ---
+
+        function checkQuizWithOptions(questions, quizName) {
+            let score = 0;
+            questions.forEach((q, index) => {
+                const optionsContainer = document.getElementById(`options-${quizName}-${index}`);
+                const selected = document.querySelector(`input[name="${quizName}-${index}"]:checked`);
+
+                optionsContainer.querySelectorAll('.quiz-option').forEach(label => {
+                    label.classList.remove('correct', 'incorrect');
+                    const radio = label.querySelector('input');
+                    if (selected && radio.value === q.answer) {
+                       label.classList.add('correct');
+                    }
+                });
+
+                if (selected) {
+                    const isCorrect = selected.value === q.answer;
+                    if (isCorrect) score++;
+                    else selected.parentElement.classList.add('incorrect');
+                }
+            });
+            const resultDiv = document.getElementById(`${quizName}-result`); // This is for practice games, mastery has its own logic
+            if(resultDiv) resultDiv.textContent = `You scored ${score} out of ${questions.length}!`;
+            return score;
+        }
+
+        const checkMatchTheSense = () => checkQuizWithOptions(matchSenseQuestions, 'match-sense');
+        const checkHappyGame = () => checkQuizWithOptions(happyQuestions, 'happy');
+        
+        function checkMasteryQuiz() {
+            const score = checkQuizWithOptions(masteryQuizQuestions, 'mastery-quiz');
+            const resultDiv = document.getElementById('mastery-quiz-result');
+             let resultMessage = `Your score: ${score} out of ${masteryQuizQuestions.length}. `;
+            if (score === masteryQuizQuestions.length) {
+                resultMessage += "You are a Senses Expert! 🌟";
+                resultDiv.className = 'mt-6 text-xl font-bold text-violet-600 text-center';
+            } else if (score >= masteryQuizQuestions.length / 2) {
+                resultMessage += "Great job, almost there! 👍";
+                resultDiv.className = 'mt-6 text-xl font-bold text-amber-600 text-center';
+            } else {
+                resultMessage += "Good try! Let's play again. 📚";
+                resultDiv.className = 'mt-6 text-xl font-bold text-red-600 text-center';
+            }
+            resultDiv.textContent = resultMessage;
+        }
+        
+        // --- Event listeners for interactive quiz options ---
+        function addInteractiveQuizListeners() {
+            document.body.addEventListener('change', event => {
+                if(event.target.type === 'radio') {
+                    const name = event.target.name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                        radio.parentElement.style.backgroundColor = '';
+                        radio.parentElement.style.borderColor = '#e5e7eb';
+                    });
+                    event.target.parentElement.style.backgroundColor = '#fef3c7'; // amber-100
+                    event.target.parentElement.style.borderColor = '#f59e0b'; // amber-500
+                }
+            });
+        }
+
+
+        window.onload = () => {
+            populateCards('senses-cards-container', senses, 'senses');
+            populateCards('feelings-cards-container', feelings, 'feelings');
+            populateMatchTheSense();
+            populateHappyGame();
+            populateMasteryQuiz();
+            addInteractiveQuizListeners();
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        };
+
+    </script>
+
+</body>
+</html>
+

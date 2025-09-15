@@ -59,6 +59,38 @@
         .select-incorrect {
             border-color: #F87171 !important;
         }
+        .label-correct {
+            color: #10B981;
+        }
+        .label-incorrect {
+            color: #EF4444;
+            text-decoration: line-through;
+        }
+        .wordsearch-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 4px;
+            user-select: none;
+        }
+        .wordsearch-cell {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background-color: #f3f4f6;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .wordsearch-cell.selecting {
+            background-color: #a5b4fc; /* Indigo 300 */
+        }
+        .wordsearch-cell.found {
+            background-color: #6ee7b7; /* Emerald 300 */
+            color: #065f46; /* Emerald 800 */
+        }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -94,6 +126,7 @@
         <button onclick="showSection('feelings')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">😊 Feelings</button>
         <button onclick="showSection('story')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">📖 Story</button>
         <button onclick="showSection('practice')" class="nav-button bg-teal-400 hover:bg-teal-500 text-white font-bold py-3 px-6 rounded-full text-lg">✍️ Practice</button>
+        <button onclick="showSection('sounds')" class="nav-button bg-indigo-400 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-full text-lg">🔊 Sounds</button>
     </nav>
 
     <main class="container mx-auto p-4 md:p-8">
@@ -499,12 +532,88 @@
                     </div>
                 </div>
 
+                 <!-- Be Safe Activity -->
+                <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-2">Be Safe!</h2>
+                    <p class="text-center text-gray-500 mb-6">Look at the pictures. Can you see, hear, or smell the danger?</p>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/clil.png" alt="Be safe activity grid" class="rounded-2xl shadow-md w-full max-w-3xl">
+                    </div>
+                </div>
+
+                <!-- More Practice -->
+                <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">More Practice!</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/clil_2.png" alt="Sounds and feelings activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Complete the exercise in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Clil, Social Science, pg 12</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
              <div class="text-center mt-8">
                 <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
             </div>
         </section>
 
+        <!-- Sounds Section -->
+        <section id="sounds" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-indigo-400">
+                    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">Sounds & Words</h2>
+                    <p class="text-center text-gray-500 mb-6">Listen, look and say the words.</p>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/sounds_1.png" alt="Sounds and words activity" class="rounded-2xl shadow-md w-full max-w-3xl">
+                    </div>
+                </div>
+
+                <!-- New Wordsearch Activity -->
+                <div class="activity-card border-indigo-400">
+                    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">Sight Words Wordsearch</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-center">Find these words:</h3>
+                            <div id="word-list" class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-lg font-semibold bg-indigo-50 p-4 rounded-xl">
+                                <!-- Word list will be generated by JS -->
+                            </div>
+                            <div id="wordsearch-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                        </div>
+                        <div id="wordsearch-grid" class="wordsearch-grid max-w-sm mx-auto">
+                            <!-- Grid will be generated by JS -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More Sounds Fun -->
+                 <div class="activity-card border-indigo-400">
+                    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">More Sounds Fun!</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/sounds_2.png" alt="Sounds and words activity 2" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Complete the exercise in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Clil, Social Science, Ex 1, pg 13</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
 
     </main>
 
@@ -1064,6 +1173,112 @@
                 feedbackEl.style.color = '#EF4444';
             }
         }
+        
+        // --- Sounds: Wordsearch ---
+        const wordsearchGridEl = document.getElementById('wordsearch-grid');
+        const wordListEl = document.getElementById('word-list');
+        const wordsearchFeedbackEl = document.getElementById('wordsearch-feedback');
+
+        const grid = [
+            ['C', 'H', 'I', 'C', 'K', 'E', 'N', 'C'],
+            ['C', 'A', 'I', 'O', 'C', 'T', 'U', 'O'],
+            ['C', 'H', 'I', 'L', 'D', 'R', 'E', 'N'],
+            ['A', 'L', 'C', 'D', 'A', 'L', 'N', 'N'],
+            ['L', 'D', 'H', 'U', 'C', 'U', 'T', 'C'],
+            ['L', 'I', 'C', 'H', 'A', 'I', 'R', 'A']
+        ];
+
+        const wordsToFind = ['CALL', 'CHAIR', 'COLD', 'CHICKEN', 'CUT', 'CHILDREN'];
+        let foundWords = [];
+        let isSelecting = false;
+        let selection = [];
+
+        function initWordsearch() {
+            wordsearchGridEl.innerHTML = '';
+            grid.flat().forEach((letter, index) => {
+                const cell = document.createElement('div');
+                cell.textContent = letter;
+                cell.className = 'wordsearch-cell';
+                cell.dataset.index = index;
+                wordsearchGridEl.appendChild(cell);
+            });
+
+            wordListEl.innerHTML = '';
+            wordsToFind.forEach(word => {
+                const p = document.createElement('p');
+                p.textContent = word;
+                p.id = `word-${word}`;
+                wordListEl.appendChild(p);
+            });
+
+            wordsearchGridEl.addEventListener('mousedown', startSelection);
+            wordsearchGridEl.addEventListener('mouseover', duringSelection);
+            document.addEventListener('mouseup', endSelection);
+        }
+
+        function getCellFromEvent(e) {
+            if (e.target.classList.contains('wordsearch-cell')) {
+                return e.target;
+            }
+            return null;
+        }
+
+        function startSelection(e) {
+            const cell = getCellFromEvent(e);
+            if (cell) {
+                isSelecting = true;
+                selection = [cell];
+                cell.classList.add('selecting');
+            }
+        }
+
+        function duringSelection(e) {
+            if (isSelecting) {
+                const cell = getCellFromEvent(e);
+                if (cell && !selection.includes(cell)) {
+                    selection.push(cell);
+                    cell.classList.add('selecting');
+                }
+            }
+        }
+
+        function endSelection() {
+            if (!isSelecting) return;
+            isSelecting = false;
+            
+            const selectedWord = selection.map(cell => cell.textContent).join('');
+            const reversedWord = [...selectedWord].reverse().join('');
+
+            let matchFound = false;
+            if (wordsToFind.includes(selectedWord) && !foundWords.includes(selectedWord)) {
+                foundWords.push(selectedWord);
+                matchFound = true;
+            } else if (wordsToFind.includes(reversedWord) && !foundWords.includes(reversedWord)) {
+                foundWords.push(reversedWord);
+                matchFound = true;
+            }
+
+            if(matchFound) {
+                selection.forEach(cell => {
+                    cell.classList.remove('selecting');
+                    cell.classList.add('found');
+                });
+                const foundWordId = `word-${foundWords[foundWords.length - 1]}`;
+                document.getElementById(foundWordId).style.textDecoration = 'line-through';
+                document.getElementById(foundWordId).style.color = '#6b7280';
+            } else {
+                 selection.forEach(cell => cell.classList.remove('selecting'));
+            }
+
+            selection = [];
+
+            if (foundWords.length === wordsToFind.length) {
+                wordsearchFeedbackEl.textContent = 'You found all the words!';
+                wordsearchFeedbackEl.style.color = '#10B981';
+            }
+        }
+
+        initWordsearch();
 
     </script>
 

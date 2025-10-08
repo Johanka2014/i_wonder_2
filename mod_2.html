@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iWonder - Module 2: Animals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0FDF4; /* Green 50 */
+        }
+        .title-font {
+            font-family: 'Balsamiq Sans', cursive;
+        }
+        .activity-card {
+            background-color: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 4px solid transparent;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .nav-button.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px #84CC16; /* Lime 500 */
+        }
+        .option-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-button:hover {
+            transform: scale(1.05);
+        }
+        .correct {
+            background-color: #34D399 !important; /* Emerald 400 */
+            color: white;
+            animation: bounce 0.5s;
+        }
+        .incorrect {
+            background-color: #F87171 !important; /* Red 400 */
+            color: white;
+            animation: shake 0.5s;
+        }
+        .select-correct {
+            border-color: #34D399 !important;
+        }
+        .select-incorrect {
+            border-color: #F87171 !important;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        /* Hide all sections by default */
+        .content-section {
+            display: none;
+        }
+        /* Show the active section */
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-green-500 p-6 text-center text-white rounded-b-3xl shadow-lg">
+        <h1 class="text-4xl md:text-6xl title-font">Module 2: Animal Adventure!</h1>
+        <p class="mt-2 text-lg">Let's learn about animals!</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="p-6 flex flex-wrap justify-center gap-3 md:gap-4">
+        <button onclick="showSection('vocabulary')" class="nav-button active bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">🐾 Vocabulary</button>
+        <button onclick="showSection('story')" class="nav-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg">📖 Story</button>
+        <button onclick="showSection('practice')" class="nav-button bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-6 rounded-full text-lg">✍️ Practice</button>
+        <button onclick="showSection('sounds')" class="nav-button bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full text-lg">🔊 Sounds</button>
+        <button onclick="showSection('animal-details')" class="nav-button bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-full text-lg">🔎 Animal Details</button>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Story Section -->
+        <section id="story" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-green-400">
+                    <h2 class="text-3xl font-bold text-center text-green-600 mb-6">From An Egg</h2>
+                    <div class="flex flex-col items-center space-y-4">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_6.png" alt="Story panel 1" class="rounded-2xl shadow-md w-full max-w-4xl">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_7.png" alt="Story panel 2" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+                <div class="activity-card border-green-400">
+                    <h2 class="text-3xl font-bold text-center text-green-600 mb-6">More Story Fun!</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_5.png" alt="Animal vocabulary activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Complete the exercise in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Module 2, Ex 3, page 17</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Vocabulary Section -->
+        <section id="vocabulary" class="content-section active">
+            <div class="space-y-8">
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Animal Groups</h2>
+                    <div class="flex justify-center mb-8">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_1.png" alt="Different groups of animals" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                     <div id="animal-groups-game" class="space-y-6">
+                        <!-- Questions generated by JS -->
+                    </div>
+                    <div id="animal-groups-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">What Am I?</h2>
+                     <div id="what-am-i-game" class="space-y-6">
+                        <!-- Questions generated by JS -->
+                    </div>
+                    <div id="what-am-i-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Odd One Out</h2>
+                     <div class="flex justify-center mb-8">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_2.png" alt="Odd one out animal activity" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                    <div id="odd-one-out-game" class="space-y-6">
+                        <!-- Game generated by JS -->
+                    </div>
+                    <div id="odd-one-out-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Look, Choose and Write</h2>
+                     <div class="flex justify-center mb-8">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_3.png" alt="Look, choose and write activity" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                     <div id="look-choose-write-game" class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+                        <!-- Game generated by JS -->
+                    </div>
+                     <div class="text-center mt-6">
+                        <button onclick="checkLookChooseWrite()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg">Check Answers</button>
+                    </div>
+                    <div id="look-choose-write-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Read and Correct</h2>
+                     <div class="flex justify-center mb-8">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_4.png" alt="Read and correct animal activity" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                    <div id="read-correct-game" class="space-y-4 max-w-3xl mx-auto">
+                        <!-- Game generated by JS -->
+                    </div>
+                     <div class="text-center mt-6">
+                        <button onclick="checkReadCorrect()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg">Check Answers</button>
+                    </div>
+                    <div id="read-correct-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section id="practice" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-lime-400">
+                    <h2 class="text-3xl font-bold text-center text-lime-600 mb-6">Fun Quiz!</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_11.png" alt="Animal quiz preview" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to play a fun animal quiz!</p>
+                            <a href="https://wordwall.net/pl/resource/7735130" target="_blank" rel="noopener noreferrer" class="nav-button bg-lime-500 hover:bg-lime-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-lime-400">
+                    <h2 class="text-3xl font-bold text-center text-lime-600 mb-6">Animal Body Parts</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_12.png" alt="Animal body parts game on Wordwall" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Play a game and test your knowledge of animal body parts!</p>
+                            <a href="https://wordwall.net/pl/resource/24037294" target="_blank" rel="noopener noreferrer" class="nav-button bg-lime-500 hover:bg-lime-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Sounds Section -->
+        <section id="sounds" class="content-section">
+             <div class="activity-card border-yellow-400">
+                <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Animal Sounds</h2>
+                <p class="text-center text-gray-500 mb-6">Click play to hear the animal sounds!</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="flex flex-col items-center">
+                        <img src="https://placehold.co/200x200/FEF9C3/854D0E?text=Cow" alt="A cow" class="rounded-full shadow-md w-32 h-32 object-cover mb-4">
+                        <audio controls class="w-full max-w-xs">
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://placehold.co/200x200/FEF9C3/854D0E?text=Sheep" alt="A sheep" class="rounded-full shadow-md w-32 h-32 object-cover mb-4">
+                        <audio controls class="w-full max-w-xs">
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://placehold.co/200x200/FEF9C3/854D0E?text=Pig" alt="A pig" class="rounded-full shadow-md w-32 h-32 object-cover mb-4">
+                        <audio controls class="w-full max-w-xs">
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://placehold.co/200x200/FEF9C3/854D0E?text=Duck" alt="A duck" class="rounded-full shadow-md w-32 h-32 object-cover mb-4">
+                        <audio controls class="w-full max-w-xs">
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <!-- Animal Details Section -->
+        <section id="animal-details" class="content-section">
+            <div class="space-y-8">
+                 <div class="activity-card border-cyan-400">
+                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">Read, Look and Complete</h2>
+                     <div class="flex justify-center mb-8">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_9.png" alt="Animal details activity" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                    <div id="animal-details-game" class="space-y-4 max-w-2xl mx-auto text-lg">
+                        <!-- Game generated by JS -->
+                    </div>
+                    <div class="text-center mt-6">
+                        <button onclick="checkAnimalDetails()" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg text-lg">Check Answers</button>
+                    </div>
+                    <div id="animal-details-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+                 <div class="activity-card border-cyan-400">
+                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">Let's Write!</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_10.png" alt="Animal writing activity" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- Navigation Logic ---
+        const sections = document.querySelectorAll('.content-section');
+        const navButtons = document.querySelectorAll('.nav-button');
+
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            navButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`button[onclick="showSection('${sectionId}')"]`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function shuffleArray(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        // --- Vocabulary: Animal Groups ---
+        const animalGroupsContainer = document.getElementById('animal-groups-game');
+        if (animalGroupsContainer) {
+            const animalGroupsData = [
+                { question: "Which animal is a bird and can swim?", answer: "duck", options: ["chicken", "duck", "shark"] },
+                { question: "Which animal is an insect?", answer: "ladybird", options: ["snake", "ladybird", "rabbit"] },
+                { question: "Which animal is a mammal?", answer: "horse", options: ["tortoise", "horse", "goldfish"] },
+                { question: "Which animal is a reptile?", answer: "snake", options: ["snake", "butterfly", "shark"] }
+            ];
+            const animalGroupsFeedbackEl = document.getElementById('animal-groups-feedback');
+            animalGroupsData.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'bg-blue-50 p-4 rounded-xl shadow-sm md:flex md:items-center md:justify-between md:gap-4';
+                const questionEl = document.createElement('p');
+                questionEl.className = 'text-lg font-semibold text-gray-700 mb-3 md:mb-0 md:flex-1';
+                questionEl.textContent = item.question;
+                row.appendChild(questionEl);
+                const optionsEl = document.createElement('div');
+                optionsEl.className = 'grid grid-cols-3 gap-2';
+                item.options.forEach(opt => {
+                    const button = document.createElement('button');
+                    button.textContent = opt;
+                    button.className = 'option-button bg-blue-200 hover:bg-blue-300 font-semibold p-2 rounded-lg';
+                    button.onclick = () => checkAnimalGroupsAnswer(opt, item.answer, button);
+                    optionsEl.appendChild(button);
+                });
+                row.appendChild(optionsEl);
+                animalGroupsContainer.appendChild(row);
+            });
+
+            function checkAnimalGroupsAnswer(selected, correct, button) {
+                const parent = button.parentElement;
+                parent.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                if (selected === correct) {
+                    button.classList.add('correct');
+                    animalGroupsFeedbackEl.textContent = 'Correct!';
+                    animalGroupsFeedbackEl.style.color = '#10B981';
+                } else {
+                    button.classList.add('incorrect');
+                    animalGroupsFeedbackEl.textContent = 'Try again!';
+                    animalGroupsFeedbackEl.style.color = '#EF4444';
+                    parent.querySelectorAll('button').forEach(btn => {
+                        if (btn.textContent === correct) {
+                            btn.classList.add('correct');
+                        }
+                    });
+                }
+            }
+        }
+
+        // --- Vocabulary: What Am I? ---
+        const whatAmIGameContainer = document.getElementById('what-am-i-game');
+        if (whatAmIGameContainer) {
+            const whatAmIData = [
+                { question: "I can fly and I sing in the morning. What am I?", answer: "Bird", options: ["Fish", "Bird", "Cat"] },
+                { question: "I have a long neck and I eat leaves from tall trees. What am I?", answer: "Giraffe", options: ["Monkey", "Elephant", "Giraffe"] },
+                { question: "I live in the water and I can swim. What am I?", answer: "Fish", options: ["Fish", "Horse", "Lion"] },
+                { question: "I say 'moo' and I live on a farm. What am I?", answer: "Cow", options: ["Sheep", "Cow", "Pig"] },
+            ];
+            const whatAmIFeedbackEl = document.getElementById('what-am-i-feedback');
+            whatAmIData.forEach(item => {
+                const questionRow = document.createElement('div');
+                questionRow.className = 'bg-blue-50 p-4 rounded-xl shadow-sm md:flex md:items-center md:justify-between md:gap-4';
+                const questionEl = document.createElement('p');
+                questionEl.className = 'text-lg font-semibold text-gray-700 mb-3 md:mb-0 md:flex-1';
+                questionEl.textContent = item.question;
+                questionRow.appendChild(questionEl);
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'grid grid-cols-3 gap-2';
+                item.options.forEach(opt => {
+                    const button = document.createElement('button');
+                    button.textContent = opt;
+                    button.className = 'option-button bg-blue-200 hover:bg-blue-300 font-semibold p-2 rounded-lg';
+                    button.onclick = () => checkWhatAmIAnswer(opt, item.answer, button);
+                    optionsContainer.appendChild(button);
+                });
+                questionRow.appendChild(optionsContainer);
+                whatAmIGameContainer.appendChild(questionRow);
+            });
+
+            function checkWhatAmIAnswer(selected, correct, button) {
+                const parent = button.parentElement;
+                parent.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                if (selected === correct) {
+                    button.classList.add('correct');
+                    whatAmIFeedbackEl.textContent = 'That\'s right!';
+                    whatAmIFeedbackEl.style.color = '#10B981';
+                } else {
+                    button.classList.add('incorrect');
+                    whatAmIFeedbackEl.textContent = 'Not quite!';
+                    whatAmIFeedbackEl.style.color = '#EF4444';
+                    parent.querySelectorAll('button').forEach(btn => {
+                        if (btn.textContent === correct) {
+                            btn.classList.add('correct');
+                        }
+                    });
+                }
+            }
+        }
+
+        // --- Vocabulary: Odd One Out ---
+        const oddOneOutContainer = document.getElementById('odd-one-out-game');
+        if (oddOneOutContainer) {
+            const oddOneOutData = [
+                { category: 'Mammals', options: ['chicken', 'horse', 'cat'], oddOne: 'chicken' },
+                { category: 'Insects', options: ['ladybird', 'butterfly', 'dog'], oddOne: 'dog' },
+                { category: 'Birds', options: ['parrot', 'bear', 'duck'], oddOne: 'bear' },
+                { category: 'Reptiles', options: ['fish', 'tortoise', 'snake'], oddOne: 'fish' },
+                { category: 'Fish', options: ['shark', 'goldfish', 'chicken'], oddOne: 'chicken' }
+            ];
+            const oddOneOutFeedbackEl = document.getElementById('odd-one-out-feedback');
+            oddOneOutData.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'bg-blue-50 p-4 rounded-xl shadow-sm md:flex md:items-center md:justify-between md:gap-4';
+                const categoryEl = document.createElement('p');
+                categoryEl.className = 'text-xl font-bold text-blue-800 mb-3 md:mb-0 md:w-1/4';
+                categoryEl.textContent = item.category;
+                row.appendChild(categoryEl);
+                const optionsEl = document.createElement('div');
+                optionsEl.className = 'grid grid-cols-3 gap-4 flex-1';
+                item.options.forEach(opt => {
+                    const button = document.createElement('button');
+                    button.textContent = opt;
+                    button.className = 'option-button bg-blue-200 hover:bg-blue-300 font-semibold p-2 rounded-lg capitalize';
+                    button.onclick = () => checkOddOneOutAnswer(opt, item.oddOne, button);
+                    optionsEl.appendChild(button);
+                });
+                row.appendChild(optionsEl);
+                oddOneOutContainer.appendChild(row);
+            });
+
+            function checkOddOneOutAnswer(selected, oddOne, button) {
+                const parent = button.parentElement;
+                parent.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                if (selected === oddOne) {
+                    button.classList.add('correct');
+                    oddOneOutFeedbackEl.textContent = 'Correct! That one doesn\'t belong.';
+                    oddOneOutFeedbackEl.style.color = '#10B981';
+                } else {
+                    button.classList.add('incorrect');
+                    oddOneOutFeedbackEl.textContent = 'Oops! That one belongs. Try the next one.';
+                    oddOneOutFeedbackEl.style.color = '#EF4444';
+                    parent.querySelectorAll('button').forEach(btn => {
+                        if (btn.textContent === oddOne) {
+                            btn.classList.add('correct');
+                        }
+                    });
+                }
+            }
+        }
+
+        // --- Vocabulary: Look, Choose & Write ---
+        const lookChooseWriteContainer = document.getElementById('look-choose-write-game');
+        if (lookChooseWriteContainer) {
+            const lookChooseWriteAnswers = { 1: 'butterfly', 2: 'shark', 3: 'horse', 4: 'duck', 5: 'rabbit', 6: 'chicken' };
+            const lookChooseWriteOptions = ['', 'butterfly', 'chicken', 'duck', 'horse', 'rabbit', 'shark'];
+            Object.keys(lookChooseWriteAnswers).forEach(num => {
+                const item = document.createElement('div');
+                item.className = 'flex items-center gap-2';
+                item.innerHTML = `
+                <label for="animal-${num}" class="font-bold text-xl">${num}.</label>
+                <select id="animal-${num}" class="border-2 border-gray-300 rounded-md p-1 w-full">
+                    ${lookChooseWriteOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                </select>
+            `;
+                lookChooseWriteContainer.appendChild(item);
+            });
+            
+            function checkLookChooseWrite() {
+                const feedbackEl = document.getElementById('look-choose-write-feedback');
+                let allCorrect = true;
+                Object.keys(lookChooseWriteAnswers).forEach(num => {
+                    const selectEl = document.getElementById(`animal-${num}`);
+                    selectEl.classList.remove('select-correct', 'select-incorrect');
+                    if (selectEl.value === lookChooseWriteAnswers[num]) {
+                        selectEl.classList.add('select-correct');
+                    } else {
+                        selectEl.classList.add('select-incorrect');
+                        allCorrect = false;
+                    }
+                });
+                if (allCorrect) {
+                    feedbackEl.textContent = 'All correct! Great job!';
+                    feedbackEl.style.color = '#10B981';
+                } else {
+                    feedbackEl.textContent = 'Some are incorrect. Try again!';
+                    feedbackEl.style.color = '#EF4444';
+                }
+            }
+        }
+        
+        // --- Vocabulary: Read and Correct ---
+        const readCorrectContainer = document.getElementById('read-correct-game');
+        if (readCorrectContainer) {
+            const readCorrectData = [
+                { sentence: 'A ladybird is a(n) <span class="line-through">bird</span>.', answer: 'insect' },
+                { sentence: 'A tortoise is a(n) <span class="line-through">mammal</span>.', answer: 'reptile' },
+                { sentence: 'A shark is a(n) <span class="line-through">reptile</span>.', answer: 'fish' },
+                { sentence: 'A duck is a(n) <span class="line-through">fish</span>.', answer: 'bird' },
+                { sentence: 'A rabbit is a(n) <span class="line-through">insect</span>.', answer: 'mammal' }
+            ];
+            const readCorrectOptions = ['', 'insect', 'reptile', 'fish', 'bird', 'mammal'];
+            readCorrectData.forEach((item, index) => {
+                const row = document.createElement('div');
+                row.className = 'bg-blue-50 p-4 rounded-xl shadow-sm md:flex md:items-center md:justify-between md:gap-4';
+                const sentenceEl = document.createElement('p');
+                sentenceEl.innerHTML = item.sentence;
+                sentenceEl.className = 'text-lg';
+                row.appendChild(sentenceEl);
+                const selectEl = document.createElement('select');
+                selectEl.id = `read-correct-${index}`;
+                selectEl.className = 'border-2 border-gray-300 rounded-md p-1';
+                readCorrectOptions.forEach(opt => {
+                    const option = document.createElement('option');
+                    option.value = opt;
+                    option.textContent = opt;
+                    selectEl.appendChild(option);
+                });
+                row.appendChild(selectEl);
+                readCorrectContainer.appendChild(row);
+            });
+
+            function checkReadCorrect() {
+                const feedbackEl = document.getElementById('read-correct-feedback');
+                let allCorrect = true;
+                readCorrectData.forEach((item, index) => {
+                    const selectEl = document.getElementById(`read-correct-${index}`);
+                    selectEl.classList.remove('select-correct', 'select-incorrect');
+                    if (selectEl.value === item.answer) {
+                        selectEl.classList.add('select-correct');
+                    } else {
+                        selectEl.classList.add('select-incorrect');
+                        allCorrect = false;
+                    }
+                });
+                if (allCorrect) {
+                    feedbackEl.textContent = 'All correct! You\'re an animal expert!';
+                    feedbackEl.style.color = '#10B981';
+                } else {
+                    feedbackEl.textContent = 'Not quite. Check your answers!';
+                    feedbackEl.style.color = '#EF4444';
+                }
+            }
+        }
+
+
+        // --- Practice: Guess the Animal Game ---
+        const guessAnimalContainer = document.getElementById('guess-animal-game');
+        if (guessAnimalContainer) {
+            const guessAnimalData = [
+                { image: 'https://placehold.co/400x300/BEF264/3F6212?text=Lion', options: ['Tiger', 'Lion', 'Cat'], answer: 'Lion' },
+                { image: 'https://placehold.co/400x300/BEF264/3F6212?text=Elephant', options: ['Elephant', 'Hippo', 'Rhino'], answer: 'Elephant' },
+                { image: 'https://placehold.co/400x300/BEF264/3F6212?text=Monkey', options: ['Bear', 'Gorilla', 'Monkey'], answer: 'Monkey' }
+            ];
+            const guessAnimalFeedbackEl = document.getElementById('guess-animal-feedback');
+            guessAnimalData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-lime-50 p-6 rounded-2xl flex flex-col items-center shadow-md';
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.className = 'rounded-xl mb-4 w-full max-w-sm';
+                card.appendChild(img);
+                const question = document.createElement('p');
+                question.className = 'text-xl font-semibold mb-4';
+                question.textContent = 'What animal is this?';
+                card.appendChild(question);
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'flex flex-wrap justify-center gap-3';
+                item.options.forEach(opt => {
+                    const button = document.createElement('button');
+                    button.textContent = opt;
+                    button.className = 'option-button bg-lime-200 hover:bg-lime-300 font-bold py-2 px-5 rounded-lg';
+                    button.onclick = (e) => checkGuessAnswer(opt === item.answer, e.target);
+                    optionsContainer.appendChild(button);
+                });
+                card.appendChild(optionsContainer);
+                guessAnimalContainer.appendChild(card);
+            });
+
+            function checkGuessAnswer(isCorrect, button) {
+                const parent = button.parentElement;
+                parent.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                if (isCorrect) {
+                    button.classList.add('correct');
+                    guessAnimalFeedbackEl.textContent = 'Correct! Well done!';
+                    guessAnimalFeedbackEl.style.color = '#10B981';
+                } else {
+                    button.classList.add('incorrect');
+                    guessAnimalFeedbackEl.textContent = 'Not quite, try the next one!';
+                    guessAnimalFeedbackEl.style.color = '#EF4444';
+                }
+            }
+        }
+        
+        // --- Practice: Animal Matching Game ---
+        const animalListContainer = document.getElementById('animal-list');
+        if(animalListContainer) {
+            const matchingData = [
+                { animal: 'Bird', home: 'Nest' },
+                { animal: 'Fish', home: 'Water' },
+                { animal: 'Bear', home: 'Cave' },
+                { animal: 'Bee', home: 'Hive' }
+            ];
+            const homeListContainer = document.getElementById('home-list');
+            const matchingFeedbackEl = document.getElementById('matching-feedback');
+            let selectedAnimal = null;
+            let selectedHome = null;
+            
+            function createMatchingButtons() {
+                animalListContainer.innerHTML = '';
+                homeListContainer.innerHTML = '';
+                const shuffledAnimals = shuffleArray([...matchingData]);
+                const shuffledHomes = shuffleArray([...matchingData]);
+
+                shuffledAnimals.forEach(item => {
+                    const button = document.createElement('button');
+                    button.textContent = item.animal;
+                    button.dataset.animal = item.animal;
+                    button.className = 'w-full text-left option-button bg-lime-100 hover:bg-lime-200 font-semibold p-4 rounded-lg';
+                    button.onclick = () => selectAnimal(item.animal, button);
+                    animalListContainer.appendChild(button);
+                });
+                
+                shuffledHomes.forEach(item => {
+                    const button = document.createElement('button');
+                    button.textContent = item.home;
+                    button.dataset.home = item.home;
+                    button.className = 'w-full text-left option-button bg-lime-100 hover:bg-lime-200 font-semibold p-4 rounded-lg';
+                    button.onclick = () => selectHome(item.home, button);
+                    homeListContainer.appendChild(button);
+                });
+            }
+
+            function selectAnimal(animal, button) {
+                if (button.disabled) return;
+                selectedAnimal = { name: animal, element: button };
+                document.querySelectorAll('#animal-list button').forEach(btn => {
+                    if(!btn.disabled) btn.style.border = '2px solid transparent';
+                });
+                button.style.border = '2px solid #84CC16';
+                checkMatch();
+            }
+            
+            function selectHome(home, button) {
+                if (button.disabled) return;
+                selectedHome = { name: home, element: button };
+                document.querySelectorAll('#home-list button').forEach(btn => {
+                    if(!btn.disabled) btn.style.border = '2px solid transparent';
+                });
+                button.style.border = '2px solid #84CC16';
+                checkMatch();
+            }
+
+            function checkMatch() {
+                if (selectedAnimal && selectedHome) {
+                    const animalEl = selectedAnimal.element;
+                    const homeEl = selectedHome.element;
+                    const pair = matchingData.find(item => item.animal === selectedAnimal.name);
+                    if (pair && pair.home === selectedHome.name) {
+                        matchingFeedbackEl.textContent = 'It\'s a match!';
+                        matchingFeedbackEl.style.color = '#10B981';
+                        animalEl.classList.add('correct');
+                        homeEl.classList.add('correct');
+                        animalEl.disabled = true;
+                        homeEl.disabled = true;
+                    } else {
+                        matchingFeedbackEl.textContent = 'Not a match, try again!';
+                        matchingFeedbackEl.style.color = '#EF4444';
+                        animalEl.classList.add('incorrect');
+                        homeEl.classList.add('incorrect');
+                        setTimeout(() => {
+                            animalEl.classList.remove('incorrect');
+                            homeEl.classList.remove('incorrect');
+                            animalEl.style.border = '2px solid transparent';
+                            homeEl.style.border = '2px solid transparent';
+                        }, 800);
+                    }
+                    selectedAnimal = null;
+                    selectedHome = null;
+                }
+            }
+            
+            function resetMatchingGame() {
+                matchingFeedbackEl.textContent = '';
+                createMatchingButtons();
+            }
+
+            createMatchingButtons();
+        }
+
+        // --- Animal Details Game ---
+        const animalDetailsGameContainer = document.getElementById('animal-details-game');
+        if (animalDetailsGameContainer) {
+            const animalDetailsFeedbackEl = document.getElementById('animal-details-feedback');
+            const detailWords = ['', 'small', 'brown', 'big', 'white', 'yellow'];
+            const detailAnswers = {
+                'rabbit-1': 'small', 'rabbit-2': 'brown',
+                'duck-1': 'yellow',
+                'horse-1': 'big', 'horse-2': 'brown'
+            };
+
+            function buildAnimalDetailsGame() {
+                animalDetailsGameContainer.innerHTML = `
+                    <div class="bg-cyan-50 p-4 rounded-xl">
+                        A rabbit is a 
+                        <select id="details-rabbit-1" class="border-2 border-gray-300 rounded-md p-1">${detailWords.map(w => `<option value="${w}">${w}</option>`).join('')}</select>
+                        and 
+                        <select id="details-rabbit-2" class="border-2 border-gray-300 rounded-md p-1">${detailWords.map(w => `<option value="${w}">${w}</option>`).join('')}</select>
+                        animal.
+                    </div>
+                    <div class="bg-cyan-50 p-4 rounded-xl">
+                        A duck is a 
+                        <select id="details-duck-1" class="border-2 border-gray-300 rounded-md p-1">${detailWords.map(w => `<option value="${w}">${w}</option>`).join('')}</select>
+                        animal.
+                    </div>
+                    <div class="bg-cyan-50 p-4 rounded-xl">
+                        A horse is a 
+                        <select id="details-horse-1" class="border-2 border-gray-300 rounded-md p-1">${detailWords.map(w => `<option value="${w}">${w}</option>`).join('')}</select>
+                        and 
+                        <select id="details-horse-2" class="border-2 border-gray-300 rounded-md p-1">${detailWords.map(w => `<option value="${w}">${w}</option>`).join('')}</select>
+                        animal.
+                    </div>
+                `;
+            }
+            buildAnimalDetailsGame();
+
+            function checkAnimalDetails() {
+                let allCorrect = true;
+                for (const id in detailAnswers) {
+                    const selectEl = document.getElementById(`details-${id}`);
+                    selectEl.classList.remove('select-correct', 'select-incorrect');
+                    if (selectEl.value !== detailAnswers[id]) {
+                        allCorrect = false;
+                        selectEl.classList.add('select-incorrect');
+                    } else {
+                        selectEl.classList.add('select-correct');
+                    }
+                }
+
+                if (allCorrect) {
+                    animalDetailsFeedbackEl.textContent = 'Perfect! You described them all correctly!';
+                    animalDetailsFeedbackEl.style.color = '#10B981';
+                } else {
+                    animalDetailsFeedbackEl.textContent = 'Some words are in the wrong place. Try again!';
+                    animalDetailsFeedbackEl.style.color = '#EF4444';
+                }
+            }
+        }
+
+    </script>
+
+</body>
+</html>
+

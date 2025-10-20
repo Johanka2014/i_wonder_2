@@ -283,35 +283,29 @@
 
         <!-- Sounds Section -->
         <section id="sounds" class="content-section">
-             <div class="activity-card border-yellow-400">
-                <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Animal Sounds</h2>
-                <p class="text-center text-gray-500 mb-6">Click play to hear the animal sounds!</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/200x200/FEF9C3/854D0E?text=Cow" alt="A cow" class="rounded-full shadow-md w-32 h-32 object-cover mb-4">
-                        <audio controls class="w-full max-w-xs">
-                            <source src="#" type="audio/mpeg">
+            <div class="space-y-8">
+                <div class="activity-card border-yellow-400">
+                    <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Sounds & Words</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/sounds_1.png" alt="Sounds and words activity" class="rounded-2xl shadow-md w-full max-w-3xl">
+                    </div>
+                </div>
+                <div class="activity-card border-yellow-400">
+                    <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Listen and Say</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/sounds_2.png" alt="Listen and say activity" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-gray-600">Click play to listen to the sounds!</p>
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_2/1_21_iwonder_2_ex2_p28.mp3" class="w-full max-w-md">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/200x200/FEF9C3/854D0E?text=Sheep" alt="A sheep" class="rounded-full shadow-md w-32 h-32 object-cover mb-4">
-                        <audio controls class="w-full max-w-xs">
-                            <source src="#" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/200x200/FEF9C3/854D0E?text=Pig" alt="A pig" class="rounded-full shadow-md w-32 h-32 object-cover mb-4">
-                        <audio controls class="w-full max-w-xs">
-                            <source src="#" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/200x200/FEF9C3/854D0E?text=Duck" alt="A duck" class="rounded-full shadow-md w-32 h-32 object-cover mb-4">
-                        <audio controls class="w-full max-w-xs">
-                            <source src="#" type="audio/mpeg">
+                </div>
+                <div class="activity-card border-yellow-400">
+                    <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Chant and Find</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/sounds_3.png" alt="Chant and find activity" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-gray-600">Listen to the chant and find the words!</p>
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_2/1_21_iwonder_2_ex3_p28.mp3" class="w-full max-w-md">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
@@ -352,6 +346,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">My Animal Book</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_20.png" alt="My Animal Book project" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+                 <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Project Review</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_2/animals_21.png" alt="Project review" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
             </div>
              <div class="text-center mt-8">
                 <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
@@ -362,14 +368,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- Navigation Logic ---
-            const sections = document.querySelectorAll('.content-section');
-            const navButtons = document.querySelectorAll('.nav-button');
-
             window.showSection = function(sectionId) {
-                sections.forEach(section => {
+                document.querySelectorAll('.content-section').forEach(section => {
                     section.classList.remove('active');
                 });
-                navButtons.forEach(button => {
+                document.querySelectorAll('.nav-button').forEach(button => {
                     button.classList.remove('active');
                 });
 
@@ -381,7 +384,9 @@
             function shuffleArray(array) {
                 return array.sort(() => Math.random() - 0.5);
             }
-
+            
+            // --- Initialize all game functions ---
+            
             // --- Vocabulary: Animal Groups ---
             const animalGroupsContainer = document.getElementById('animal-groups-game');
             if (animalGroupsContainer) {

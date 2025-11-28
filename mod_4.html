@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iWonder - Module 4: Food</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F9FF; /* Blue 50 */
+        }
+        .title-font {
+            font-family: 'Balsamiq Sans', cursive;
+        }
+        .activity-card {
+            background-color: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 4px solid transparent;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .nav-button.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px #60A5FA; /* Blue 400 */
+        }
+        .option-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-button:hover {
+            transform: scale(1.05);
+        }
+        .correct {
+            background-color: #34D399 !important; /* Emerald 400 */
+            color: white;
+            animation: bounce 0.5s;
+        }
+        .incorrect {
+            background-color: #F87171 !important; /* Red 400 */
+            color: white;
+            animation: shake 0.5s;
+        }
+        .select-correct {
+            border-color: #34D399 !important;
+        }
+        .select-incorrect {
+            border-color: #F87171 !important;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+        .checkbox-label:hover {
+            background-color: #F3F4F6; /* Gray 100 */
+        }
+        .checkbox-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #D1D5DB; /* Gray 300 */
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .checkbox-custom::after {
+            content: '✔';
+            color: white;
+            font-size: 16px;
+            display: none;
+        }
+        input[type="checkbox"]:checked + .checkbox-custom {
+            background-color: #3B82F6; /* Blue 500 */
+            border-color: #3B82F6;
+        }
+        input[type="checkbox"]:checked + .checkbox-custom::after {
+            display: block;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        /* Hide all sections by default */
+        .content-section {
+            display: none;
+        }
+        /* Show the active section */
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-blue-500 p-6 text-center text-white rounded-b-3xl shadow-lg">
+        <h1 class="text-4xl md:text-6xl title-font">Module 4: Food!</h1>
+        <p class="mt-2 text-lg">Let's learn about food!</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="p-6 flex flex-wrap justify-center gap-3 md:gap-4">
+        <button onclick="showSection('vocabulary')" class="nav-button active bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">🏠 Vocabulary</button>
+        <button onclick="showSection('story')" class="nav-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg">📖 Story</button>
+        <button onclick="showSection('my-room')" class="nav-button bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-full text-lg">🛏️ My Room</button>
+        <button onclick="showSection('materials')" class="nav-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full text-lg">🧱 Materials</button>
+        <button onclick="showSection('practice')" class="nav-button bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-6 rounded-full text-lg">✍️ Practice</button>
+        <button onclick="showSection('sounds')" class="nav-button bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full text-lg">🔊 Sounds</button>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Vocabulary Section -->
+        <section id="vocabulary" class="content-section active">
+            <div class="space-y-8">
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Parts of a House Game</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_4/1.png" alt="Food" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Play a game to learn the parts of a house!</p>
+                            <a href="https://wordwall.net/resource/25869509" target="_blank" rel="noopener noreferrer" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Learn the Words</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/2.png" alt="Learn house vocabulary" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Find the Match</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/3.png" alt="Find the match game" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Play a game to match the words to the pictures!</p>
+                            <a href="https://wordwall.net/resource/89755427" target="_blank" rel="noopener noreferrer" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">More Vocabulary Practice</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/4.png" alt="Vocabulary practice" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Complete the exercise in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Module 3, Exercise 1, pg 30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section id="story" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-green-400">
+                    <h2 class="text-3xl font-bold text-center text-green-600 mb-6">The Cool Caravan!</h2>
+                    <div class="flex flex-col items-center space-y-4">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/5.png" alt="Story panel 1" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+                <div class="activity-card border-green-400">
+                    <h2 class="text-3xl font-bold text-center text-green-600 mb-6">Tick the Boxes!</h2>
+                    <p class="text-center text-gray-600 mb-6">Read the sentences about Uncle Lucas's caravan and tick Yes or No.</p>
+                    <div id="story-tick-boxes-game" class="max-w-xl mx-auto space-y-4">
+                        <!-- Questions will be generated by JavaScript -->
+                    </div>
+                    <div class="text-center mt-6">
+                        <button onclick="checkStoryTickBoxes()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg text-lg">Check Answers</button>
+                    </div>
+                    <div id="story-tick-boxes-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+                <div class="activity-card border-green-400">
+                    <h2 class="text-3xl font-bold text-center text-green-600 mb-6">Story Practice</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/6.png" alt="Story practice activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Complete the exercise in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Module 3, Exercise 3, pg 32</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <!-- My Room Section -->
+        <section id="my-room" class="content-section">
+            <div class="space-y-8">
+                 <div class="activity-card border-cyan-400">
+                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">Furniture Practice</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/furniture.png" alt="Furniture practice" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Play a game to practice the words for furniture!</p>
+                            <a href="https://wordwall.net/resource/100753618" target="_blank" rel="noopener noreferrer" class="nav-button bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-cyan-400">
+                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">My Room Song</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/room_song.png" alt="My Room Song" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-gray-600">Click play to listen to the song!</p>
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_3/1_30_iwonder2_ex9_p37.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                        
+                <div class="activity-card border-cyan-400">
+                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">Listen and Match</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/8.png" alt="Listen and match furniture" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Listen and match in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                             <p class="text-md text-gray-500 mt-2">Module 3, Exercise 7, pg 34</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-cyan-400">
+                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">Listen and Colour</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/7.png" alt="Listen and colour activity" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                    <p class="text-center text-lg text-gray-600 mt-4">Listen to the audio and colour the picture!</p>
+                    <!-- Audio file not provided, so I'll add a placeholder comment -->
+                    <!-- <audio controls src="..."></audio> -->
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Materials Section -->
+        <section id="materials" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Building Materials</h2>
+                    <div class="flex justify-center mb-8">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/11.png" alt="Building materials" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Listen and Find</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/10.png" alt="Listen and find materials" class="rounded-2xl shadow-md w-full max-w-4xl">
+                        <p class="text-lg text-gray-600">Click play to listen and find the materials!</p>
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_3/1_31_iwonder2_ex11_p38.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Types of Houses</h2>
+                    <div class="flex justify-center mb-8">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/materials_1.png" alt="Types of houses" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                     <div id="materials-game" class="space-y-6">
+                        <!-- Questions generated by JS -->
+                    </div>
+                     <div class="text-center mt-6">
+                        <button onclick="checkMaterials()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg text-lg">Check Answers</button>
+                    </div>
+                    <div id="materials-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Our World</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/12.png" alt="Our World activity" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Let's Play!</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/14.png" alt="Game board" class="rounded-2xl shadow-md w-full max-w-4xl">
+                        <p class="text-lg text-gray-600">Click play to listen to the game audio!</p>
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_3/1_32_iwonder2_ex3_p41.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">My WONDER Progress</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/15.png" alt="My Wonder Progress" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">My Module 3 Book</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/16.png" alt="My Module 3 Book project" class="rounded-2xl shadow-md w-full max-w-4xl">
+                        <p class="text-lg text-gray-600">Click play to listen to the audio!</p>
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_3/1_32_iwonder2_ex3_p41.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                <div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Project Review</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/21.png" alt="Project review" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Review the project in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Mod 3, CLIL, Design and Technology, page 38</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section id="practice" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-lime-400">
+                    <h2 class="text-3xl font-bold text-center text-lime-600 mb-6">My Dream House</h2>
+                    <p class="text-center text-gray-500 mb-6">Look at Mike's dream house and fill in the blanks!</p>
+                     <div class="flex justify-center mb-8">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/practice_1.png" alt="Mike's dream house" class="rounded-2xl shadow-md w-full max-w-2xl">
+                    </div>
+                    <div id="dream-house-game" class="space-y-4 max-w-3xl mx-auto text-lg">
+                        <!-- Game generated by JS -->
+                    </div>
+                     <div class="text-center mt-6">
+                        <button onclick="checkDreamHouse()" class="bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-6 rounded-lg text-lg">Check Answers</button>
+                    </div>
+                    <div id="dream-house-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+                <div class="activity-card border-lime-400">
+                    <h2 class="text-3xl font-bold text-center text-lime-600 mb-6">What's Missing?</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/practice_2.png" alt="What's missing activity" class="rounded-2xl shadow-md w-full max-w-3xl">
+                    </div>
+                    <p class="text-center text-lg text-gray-600 mt-4">Read the list and draw the missing parts on the house!</p>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Sounds Section -->
+        <section id="sounds" class="content-section">
+             <div class="space-y-8">
+                <div class="activity-card border-yellow-400">
+                    <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Sounds & Words</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/17.png" alt="Sounds and words activity" class="rounded-2xl shadow-md w-full max-w-3xl">
+                        <p class="text-lg text-gray-600">Click play to listen!</p>
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_3/1_34_iwonder_2_ex3_p42.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                <div class="activity-card border-yellow-400">
+                    <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Match the Sounds</h2>
+                    <div class="flex justify-center mb-6">
+                         <img src="https://johanka2014.github.io/i_wonder_2/mod_3/18.png" alt="Match the sounds" class="rounded-2xl shadow-md w-full max-w-lg">
+                    </div>
+                    <div id="sounds-game-container" class="space-y-6 max-w-xl mx-auto">
+                        <!-- Game generated by JS -->
+                    </div>
+                     <div class="text-center mt-6">
+                        <button onclick="checkSoundsGame()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg text-lg">Check Answers</button>
+                    </div>
+                    <div id="sounds-game-feedback" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                </div>
+                <div class="activity-card border-yellow-400">
+                    <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Review</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/22.png" alt="Sounds review" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Complete the exercise in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Mod 3, CLIL 3, Exercise 1, pg 39</p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Navigation Logic ---
+            window.showSection = function(sectionId) {
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.querySelectorAll('.nav-button').forEach(button => {
+                    button.classList.remove('active');
+                });
+
+                const el = document.getElementById(sectionId);
+                if (el) {
+                    el.classList.add('active');
+                }
+                const btn = document.querySelector(`button[onclick="showSection('${sectionId}')"]`);
+                if (btn) {
+                    btn.classList.add('active');
+                }
+                window.scrollTo(0, 0);
+            }
+
+            function shuffleArray(array) {
+                return array.sort(() => Math.random() - 0.5);
+            }
+            
+            // --- Vocabulary: House Parts Game ---
+            const housePartsContainer = document.getElementById('house-parts-game');
+            if (housePartsContainer) {
+                // This game was replaced, so this logic is no longer needed.
+            }
+
+            // --- Vocabulary: How Many Game ---
+            const howManyContainer = document.getElementById('how-many-game');
+            if (howManyContainer) {
+                const howManyData = [
+                    { item: 'roofs', answer: 'two', options: ['one', 'two', 'three'] },
+                    { item: 'windows', answer: 'eight', options: ['five', 'seven', 'eight'] },
+                    { item: 'doors', answer: 'two', options: ['one', 'two', 'three'] },
+                    { item: 'people', answer: 'two', options: ['two', 'three', 'four'] },
+                ];
+                const howManyFeedbackEl = document.getElementById('how-many-feedback');
+                
+                howManyData.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'bg-blue-50 p-4 rounded-xl shadow-sm md:flex md:items-center md:justify-between md:gap-4';
+                    const question = document.createElement('p');
+                    question.className = 'text-lg font-semibold text-gray-700 mb-3 md:mb-0 md:flex-1';
+                    question.textContent = `How many ${item.item} are there?`;
+                    row.appendChild(question);
+                    
+                    const optionsEl = document.createElement('div');
+                    optionsEl.className = 'grid grid-cols-3 gap-2';
+                    item.options.forEach(opt => {
+                        const button = document.createElement('button');
+                        button.textContent = opt;
+                        button.className = 'option-button bg-blue-200 hover:bg-blue-300 font-semibold p-2 rounded-lg';
+                        button.onclick = () => checkHowManyAnswer(opt, item.answer, button);
+                        optionsEl.appendChild(button);
+                    });
+                    row.appendChild(optionsEl);
+                    howManyContainer.appendChild(row);
+                });
+
+                function checkHowManyAnswer(selected, correct, button) {
+                    const parent = button.parentElement;
+                    parent.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                    if (selected === correct) {
+                        button.classList.add('correct');
+                        howManyFeedbackEl.textContent = 'Correct!';
+                        howManyFeedbackEl.style.color = '#10B981';
+                    } else {
+                        button.classList.add('incorrect');
+                        howManyFeedbackEl.textContent = 'Try again!';
+                        howManyFeedbackEl.style.color = '#EF4444';
+                        parent.querySelectorAll('button').forEach(btn => {
+                            if (btn.textContent === correct) btn.classList.add('correct');
+                        });
+                    }
+                }
+            }
+
+            // --- Story: Tick the Boxes Game ---
+            const storyTickBoxesContainer = document.getElementById('story-tick-boxes-game');
+            if (storyTickBoxesContainer) {
+                const tickBoxData = [
+                    { id: 1, text: "Uncle Lucas has got a caravan.", answer: "Yes" },
+                    { id: 2, text: "There are five rooms in the caravan.", answer: "No" },
+                    { id: 3, text: "There are three windows in the living room.", answer: "No" },
+                    { id: 4, text: "There is a bathroom in the caravan.", answer: "Yes" }
+                ];
+                
+                tickBoxData.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'flex items-center justify-between py-2 border-b border-gray-200 last:border-b-0';
+                    row.innerHTML = `
+                        <p class="text-xl font-semibold text-gray-700 mr-4 flex-grow"><span class="text-2xl font-extrabold text-${item.id === 1 ? 'blue' : item.id === 2 ? 'orange' : item.id === 3 ? 'green' : 'red'}-500 mr-2">${item.id}</span> ${item.text}</p>
+                        <div class="flex space-x-4">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="q${item.id}" value="Yes" class="hidden">
+                                <span class="checkbox-custom" data-label="Yes"></span>
+                                <span class="text-lg text-blue-600 font-bold">Yes</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="q${item.id}" value="No" class="hidden">
+                                <span class="checkbox-custom" data-label="No"></span>
+                                <span class="text-lg text-orange-600 font-bold">No</span>
+                            </label>
+                        </div>
+                    `;
+                    storyTickBoxesContainer.appendChild(row);
+
+                    // Add event listeners to ensure only one checkbox per question can be ticked
+                    const checkboxes = row.querySelectorAll(`input[name="q${item.id}"]`);
+                    checkboxes.forEach(checkbox => {
+                        checkbox.addEventListener('change', (event) => {
+                            if (event.target.checked) {
+                                checkboxes.forEach(cb => {
+                                    if (cb !== event.target) {
+                                        cb.checked = false;
+                                    }
+                                });
+                            }
+                        });
+                    });
+                });
+
+                window.checkStoryTickBoxes = function() {
+                    const feedbackEl = document.getElementById('story-tick-boxes-feedback');
+                    let allCorrect = true;
+
+                    tickBoxData.forEach(item => {
+                        const yesCheckbox = document.querySelector(`input[name="q${item.id}"][value="Yes"]`);
+                        const noCheckbox = document.querySelector(`input[name="q${item.id}"][value="No"]`);
+                        const yesCustom = yesCheckbox.nextElementSibling;
+                        const noCustom = noCheckbox.nextElementSibling;
+
+                        // Reset styles
+                        yesCustom.style.backgroundColor = '';
+                        yesCustom.style.borderColor = '#D1D5DB';
+                        noCustom.style.backgroundColor = '';
+                        noCustom.style.borderColor = '#D1D5DB';
+                        yesCustom.classList.remove('bounce', 'shake');
+                        noCustom.classList.remove('bounce', 'shake');
+
+
+                        const selectedAnswer = yesCheckbox.checked ? 'Yes' : (noCheckbox.checked ? 'No' : null);
+
+                        if (selectedAnswer === item.answer) {
+                            if (item.answer === 'Yes') {
+                                yesCustom.style.backgroundColor = '#34D399'; // Correct (Emerald 400)
+                                yesCustom.style.borderColor = '#34D399';
+                                yesCustom.classList.add('bounce');
+                            } else {
+                                noCustom.style.backgroundColor = '#34D399'; // Correct (Emerald 400)
+                                noCustom.style.borderColor = '#34D399';
+                                noCustom.classList.add('bounce');
+                            }
+                        } else {
+                            allCorrect = false;
+                             if (selectedAnswer === 'Yes') {
+                                yesCustom.style.backgroundColor = '#EF4444'; // Incorrect (Red 400)
+                                yesCustom.style.borderColor = '#EF4444';
+                                yesCustom.classList.add('shake');
+                            } else if (selectedAnswer === 'No') {
+                                noCustom.style.backgroundColor = '#EF4444'; // Incorrect (Red 400)
+                                noCustom.style.borderColor = '#EF4444';
+                                noCustom.classList.add('shake');
+                            }
+                            // Show correct answer if not selected
+                            if (item.answer === 'Yes') {
+                                yesCustom.style.backgroundColor = '#34D399';
+                                yesCustom.style.borderColor = '#34D399';
+                                const after = yesCustom.querySelector('::after');
+                                if (after) after.style.display = 'block';
+                            } else {
+                                noCustom.style.backgroundColor = '#34D399';
+                                noCustom.style.borderColor = '#34D399';
+                                const after = noCustom.querySelector('::after');
+                                if(after) after.style.display = 'block';
+                            }
+                        }
+                    });
+
+                    if (allCorrect) {
+                        feedbackEl.textContent = 'All correct! Excellent!';
+                        feedbackEl.style.color = '#10B981';
+                    } else {
+                        feedbackEl.textContent = 'Some answers are incorrect. Try again!';
+                        feedbackEl.style.color = '#EF4444';
+                    }
+                };
+            }
+
+            // --- My Room: Items Game ---
+            const roomItemsContainer = document.getElementById('room-items-game');
+            if (roomItemsContainer) {
+                // This logic was removed when the activity was replaced
+            }
+
+            // --- My Room: Yes/No Game ---
+            const yesNoContainer = document.getElementById('yes-no-game');
+            if (yesNoContainer) {
+                const yesNoData = [
+                    { question: "1. There is an armchair in the room.", answer: "Yes" },
+                    { question: "2. There is a teddy bear on the bed.", answer: "No" },
+                    { question: "3. There is a cupboard on the wall.", answer: "No" },
+                    { question: "4. There are books in the cupboard.", answer: "Yes" },
+                    { question: "5. There is a ball under the armchair.", answer: "No" },
+                    { question: "6. There is a schoolbag under the bed.", answer: "No" }
+                ];
+                const yesNoFeedbackEl = document.getElementById('yes-no-feedback');
+
+                yesNoData.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'bg-cyan-50 p-4 rounded-xl shadow-sm md:flex md:items-center md:justify-between md:gap-4';
+                    const question = document.createElement('p');
+                    question.className = 'text-lg font-semibold text-gray-700 mb-3 md:mb-0 md:flex-1';
+                    question.textContent = item.question;
+                    row.appendChild(question);
+                    
+                    const optionsEl = document.createElement('div');
+                    optionsEl.className = 'grid grid-cols-2 gap-2';
+                    ['Yes', 'No'].forEach(opt => {
+                        const button = document.createElement('button');
+                        button.textContent = opt;
+                        button.className = 'option-button bg-cyan-200 hover:bg-cyan-300 font-semibold p-2 rounded-lg';
+                        button.onclick = () => checkYesNoAnswer(opt, item.answer, button);
+                        optionsEl.appendChild(button);
+                    });
+                    row.appendChild(optionsEl);
+                    yesNoContainer.appendChild(row);
+                });
+
+                function checkYesNoAnswer(selected, correct, button) {
+                    const parent = button.parentElement;
+                    parent.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                    if (selected === correct) {
+                        button.classList.add('correct');
+                        yesNoFeedbackEl.textContent = 'Correct!';
+                        yesNoFeedbackEl.style.color = '#10B981';
+                    } else {
+                        button.classList.add('incorrect');
+                        yesNoFeedbackEl.textContent = 'Try again!';
+                        yesNoFeedbackEl.style.color = '#EF4444';
+                        parent.querySelectorAll('button').forEach(btn => {
+                            if (btn.textContent === correct) btn.classList.add('correct');
+                        });
+                    }
+                }
+            }
+            
+            // --- Materials Game ---
+            const materialsContainer = document.getElementById('materials-game');
+            if (materialsContainer) {
+                const materialsData = [
+                    { item: 'igloo', answer: 'ice' },
+                    { item: 'caravan', answer: 'metal' },
+                    { item: 'houseboat', answer: 'wood' },
+                    { item: 'castle', answer: 'stone' }
+                ];
+                const materialsOptions = ['', 'ice', 'metal', 'wood', 'stone'];
+                
+                materialsData.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'bg-purple-50 p-4 rounded-xl shadow-sm md:flex md:items-center md:justify-between md:gap-4';
+                    const label = document.createElement('label');
+                    label.className = 'text-xl font-semibold text-gray-700 capitalize';
+                    label.textContent = `What is the ${item.item} made of?`;
+                    row.appendChild(label);
+                    
+                    const select = document.createElement('select');
+                    select.id = `material-${item.item}`;
+                    select.dataset.answer = item.answer;
+                    select.className = 'border-2 border-gray-300 rounded-md p-2 w-full md:w-1/2';
+                    materialsOptions.forEach(opt => {
+                        select.innerHTML += `<option value="${opt}">${opt}</option>`;
+                    });
+                    row.appendChild(select);
+                    materialsContainer.appendChild(row);
+                });
+
+                window.checkMaterials = function() {
+                    const feedbackEl = document.getElementById('materials-feedback');
+                    let allCorrect = true;
+                    materialsData.forEach(item => {
+                        const selectEl = document.getElementById(`material-${item.item}`);
+                        selectEl.classList.remove('select-correct', 'select-incorrect');
+                        if (selectEl.value === item.answer) {
+                            selectEl.classList.add('select-correct');
+                        } else {
+                            selectEl.classList.add('select-incorrect');
+                            allCorrect = false;
+                        }
+                    });
+                    if (allCorrect) {
+                        feedbackEl.textContent = 'All correct! You know your materials!';
+                        feedbackEl.style.color = '#10B981';
+                    } else {
+                        feedbackEl.textContent = 'Some are incorrect. Look again!';
+                        feedbackEl.style.color = '#EF4444';
+                    }
+                }
+            }
+
+            // --- Materials Quiz ---
+            const materialsQuizContainer = document.getElementById('materials-quiz');
+            if(materialsQuizContainer) {
+                // This logic was removed when the activity was replaced
+            }
+
+            // --- Practice: Dream House Game ---
+            const dreamHouseContainer = document.getElementById('dream-house-game');
+            if (dreamHouseContainer) {
+                const dreamHouseAnswers = { 1: 'caravan', 2: 'metal', 3: 'windows', 4: 'doors', 5: 'bed', 6: 'mirror', 7: 'lamp', 8: 'mat', 9: 'sofa', 10: 'armchairs' };
+                const dreamHouseOptions = {
+                    1: ['caravan', 'houseboat', 'castle'],
+                    2: ['wood', 'metal', 'stone'],
+                    3: ['windows', 'roofs', 'chimneys'],
+                    4: ['doors', 'walls', 'floors'],
+                    5: ['bed', 'table', 'chair'],
+                    6: ['clock', 'mirror', 'mat'],
+                    7: ['lamp', 'sofa', 'bed'],
+                    8: ['mat', 'cupboard', 'clock'],
+                    9: ['armchair', 'sofa', 'table'],
+                    10: ['chairs', 'beds', 'armchairs']
+                };
+
+                let gameHTML = `
+                    <p>This is my dream house! It's a big ${createSelect('1', dreamHouseOptions[1])}. It's made of ${createSelect('2', dreamHouseOptions[2])}.</p>
+                    <p>There are eight ${createSelect('3', dreamHouseOptions[3])} and two ${createSelect('4', dreamHouseOptions[4])}.</p>
+                    <p>In my room, there is a big blue ${createSelect('5', dreamHouseOptions[5])}. There is a ${createSelect('6', dreamHouseOptions[6])} on the wall and a red ${createSelect('7', dreamHouseOptions[7])} on a red ${createSelect('8', dreamHouseOptions[8])}.</p>
+                    <p>There isn't a ${createSelect('9', dreamHouseOptions[9])} but there are two lovely green ${createSelect('10', dreamHouseOptions[10])}!</p>
+                `;
+                dreamHouseContainer.innerHTML = gameHTML;
+
+                function createSelect(id, options) {
+                    const optionsHTML = ['', ...options].map(opt => `<option value="${opt}">${opt}</option>`).join('');
+                    return `<select id="dream-${id}" data-answer="${dreamHouseAnswers[id]}" class="border-2 border-gray-300 rounded-md p-1">${optionsHTML}</select>`;
+                }
+
+                window.checkDreamHouse = function() {
+                    const feedbackEl = document.getElementById('dream-house-feedback');
+                    let allCorrect = true;
+                    Object.keys(dreamHouseAnswers).forEach(num => {
+                        const selectEl = document.getElementById(`dream-${num}`);
+                        selectEl.classList.remove('select-correct', 'select-incorrect');
+                        if (selectEl.value === selectEl.dataset.answer) {
+                            selectEl.classList.add('select-correct');
+                        } else {
+                            selectEl.classList.add('select-incorrect');
+                            allCorrect = false;
+                        }
+                    });
+                    if (allCorrect) {
+                        feedbackEl.textContent = 'All correct! What a cool house!';
+                        feedbackEl.style.color = '#10B981';
+                    } else {
+                        feedbackEl.textContent = 'Not quite. Read the story again!';
+                        feedbackEl.style.color = '#EF4444';
+                    }
+                }
+            }
+
+            // --- Sounds Game ---
+            const soundsGameContainer = document.getElementById('sounds-game-container');
+            if (soundsGameContainer) {
+                const soundsData = {
+                    'ick': 'br', 'astic': 'pl', 'ue': 'bl', 'ock': 'cl', 'een': 'gr'
+                };
+                const soundOptions = ['', 'bl', 'cl', 'br', 'gr', 'pl'];
+
+                Object.keys(soundsData).forEach(suffix => {
+                    const row = document.createElement('div');
+                    row.className = 'flex items-center gap-2';
+                    const select = document.createElement('select');
+                    select.id = `sound-${suffix}`;
+                    select.dataset.answer = soundsData[suffix];
+                    select.className = 'border-2 border-gray-300 rounded-md p-1';
+                    soundOptions.forEach(opt => {
+                        select.innerHTML += `<option value="${opt}">${opt}</option>`;
+                    });
+                    row.appendChild(select);
+                    const label = document.createElement('label');
+                    label.textContent = suffix;
+                    label.className = 'text-xl font-semibold';
+                    row.appendChild(label);
+                    soundsGameContainer.appendChild(row);
+                });
+
+                window.checkSoundsGame = function() {
+                    const feedbackEl = document.getElementById('sounds-game-feedback');
+                    let allCorrect = true;
+                    Object.keys(soundsData).forEach(suffix => {
+                        const selectEl = document.getElementById(`sound-${suffix}`);
+                        selectEl.classList.remove('select-correct', 'select-incorrect');
+                        if (selectEl.value === selectEl.dataset.answer) {
+                            selectEl.classList.add('select-correct');
+                        } else {
+                            selectEl.classList.add('select-incorrect');
+                            allCorrect = false;
+                        }
+                    });
+                    if (allCorrect) {
+                        feedbackEl.textContent = 'All correct! Great job!';
+                        feedbackEl.style.color = '#10B981';
+                    } else {
+                        feedbackEl.textContent = 'Some are incorrect. Try again!';
+                        feedbackEl.style.color = '#EF4444';
+                    }
+                }
+            }
+
+        });
+    </script>
+
+</body>
+</html>

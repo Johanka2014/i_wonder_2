@@ -1,0 +1,56 @@
+tile with image
+
+<div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Odd one out</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_4/2.png" alt="Odd one out" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+
+tile with Wordwall activity
+
+<div class="activity-card border-blue-400">
+                    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Find the Match</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/3.png" alt="Find the match game" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Play a game to match the words to the pictures!</p>
+                            <a href="https://wordwall.net/resource/89755427" target="_blank" rel="noopener noreferrer" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+song
+
+<div class="activity-card border-cyan-400">
+                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">My Room Song</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/room_song.png" alt="My Room Song" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-gray-600">Click play to listen to the song!</p>
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_3/1_30_iwonder2_ex9_p37.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+
+activity link
+
+<div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Project Review</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/21.png" alt="Project review" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Review the project in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Mod 3, CLIL, Design and Technology, page 38</p>
+                        </div>
+                    </div>
+                </div>

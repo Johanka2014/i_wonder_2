@@ -395,7 +395,7 @@
             const storyQuizContainer = document.getElementById('story-quiz-container');
             if (storyQuizContainer) {
                 const questions = [
-                    { q: "What are the children having first?", options: ["A sack race", "A swimming race"], a: "A sack race" },
+                    { q: "What are the children doing first?", options: ["A sack race", "A swimming race"], a: "A sack race" },
                     { q: "Who runs in the race by mistake?", options: ["The teacher", "Chico the dog"], a: "Chico the dog" },
                     { q: "What happens to Carlos in the egg race?", options: ["He wins", "He falls"], a: "He falls" },
                     { q: "Who is the best at the end?", options: ["Chico", "Carlos"], a: "Chico" }
@@ -438,6 +438,22 @@
                     }
                 }
             }
+
+<div class="activity-card border-blue-500">
+                    <h2 class="text-3xl font-bold text-center text-blue-500 mb-6">Story Review</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_5/17.png" alt="Story review" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Review the story in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-purple-500 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Digital Book
+                            </a>
+                            <p class="text-md text-gray-500 mt-2">Mod 5, exercise 4, pg 58</p>
+                        </div>
+                    </div>
+                </div>
 
             // --- Grammar Game ---
             const grammarContainer = document.getElementById('grammar-game-container');

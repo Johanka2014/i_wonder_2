@@ -1,11 +1,14 @@
 tile with image
 
-<div class="activity-card border-teal-400">
-                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Odd one out</h2>
+<div class="activity-card border-yellow-500">
+                    <h2 class="text-3xl font-bold text-center text-yellow-500 mb-6">Numbers in a row</h2>
                     <div class="flex justify-center">
-                        <img src="https://johanka2014.github.io/i_wonder_2/mod_4/2.png" alt="Odd one out" class="rounded-2xl shadow-md w-full max-w-4xl">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_5/21.png" alt="Numbers in a row" class="rounded-2xl shadow-md w-full max-w-4xl">
                     </div>
                 </div>
+
+…
+
 
 tile with Wordwall activity
 
@@ -24,14 +27,34 @@ tile with Wordwall activity
                     </div>
                 </div>
 
+…
+
+tile with external link
+
+<div class="activity-card border-purple-400">
+                    <h2 class="text-3xl font-bold text-center text-purple-400 mb-6">Let's play a game</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_5/18.png" alt="Let's play a game" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Open the link to roll the die!</p>
+                            <a href="https://www.calculator.net/dice-roller.html" target="_blank" rel="noopener noreferrer" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+...
+
 song
 
-<div class="activity-card border-cyan-400">
-                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">My Room Song</h2>
+<div class="activity-card border-purple-500">
+                    <h2 class="text-3xl font-bold text-center text-purple-500 mb-6">Can I play with you? Song</h2>
                     <div class="flex flex-col items-center gap-6">
-                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/room_song.png" alt="My Room Song" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/room_song.png" alt="Can I play with you? Song" class="rounded-2xl shadow-md w-full max-w-2xl">
                         <p class="text-lg text-gray-600">Click play to listen to the song!</p>
-                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_3/1_30_iwonder2_ex9_p37.mp3" class="w-full max-w-md">
+                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_5/1_51_iwonder_2_song_ex9_p63" class="w-full max-w-md">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
@@ -39,18 +62,18 @@ song
 
 activity link
 
-<div class="activity-card border-purple-400">
-                    <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">Project Review</h2>
+<div class="activity-card border-purple-500">
+                    <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Project Review</h2>
                     <div class="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <img src="https://johanka2014.github.io/i_wonder_2/mod_3/21.png" alt="Project review" class="rounded-2xl shadow-md w-full">
+                            <img src="https://johanka2014.github.io/i_wonder_2/mod_5/20.png" alt="Project review" class="rounded-2xl shadow-md w-full">
                         </div>
                         <div class="text-center">
-                            <p class="text-xl mb-6 text-gray-600">Review the project in the digital book!</p>
-                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                            <p class="text-xl mb-6 text-gray-600">Review the story in the digital book!</p>
+                            <a href="https://expressdigibooks.com/reader/read/297" target="_blank" rel="noopener noreferrer" class="nav-button bg-yellow-600 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
                                 Open Digital Book
                             </a>
-                            <p class="text-md text-gray-500 mt-2">Mod 3, CLIL, Design and Technology, page 38</p>
+                            <p class="text-md text-gray-500 mt-2">Mod 5, exercise 10, page 62</p>
                         </div>
                     </div>
                 </div>
@@ -73,5 +96,63 @@ https://johanka2014.github.io/i_wonder_2/mod_4/12.png
                     </div>   
             </div>
 
+two columns?
+
+<div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Clothing words</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/vocab.png" alt="Clothing words" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/vocab.png" alt="Clothing words" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        </div>
+                    </div>   
+            </div>
+
+
+
+
+
+DUAL COLUMNS AND AUDIO
+
+        <div class="activity-card border-teal-400">
+            <h2 class="text-3xl font-bold text-center text-teal-600 mb-8">Practice Test Listening</h2>
+            
+            <!-- Grid Container: two columns on medium screens and up, with 8-unit gap -->
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                
+                <!-- START OF COLUMN 1: Now contains all the image and audio elements -->
+                <div>
+                    <!-- Corrected alt attribute: the 'Song' part was breaking the alt text in the original snippet -->
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/7.png" 
+                         alt="Clothing words for song" 
+                         class="rounded-2xl shadow-md w-full mb-4">
+                    
+                    <p class="text-lg text-gray-600 mb-2">Audio file:</p>
+                    
+                    <!-- The audio element is now correctly nested within Column 1 -->
+                    <audio controls 
+                           src="https://johanka2014.github.io/get_ready_for_starters/mod_5/21 21 Pista 21.mp3" 
+                           class="w-full max-w-md">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div> 
+                <!-- END OF COLUMN 1 -->
+
+                <!-- START OF COLUMN 2: Contains the second image, centered -->
+                <div class="text-center">
+                    <div>
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/8.png" 
+                             alt="Clothing words practice image" 
+                             class="rounded-2xl shadow-md w-full">
+                    </div>
+                </div>
+                <!-- END OF COLUMN 2 -->
+                
+            </div>
+ 
 
 

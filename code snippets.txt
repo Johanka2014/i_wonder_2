@@ -7,20 +7,22 @@ tile with image
                     </div>
                 </div>
 
+class="rounded-2xl shadow-md w-full max-w-4xl">
+
 …
 
 
 tile with Wordwall activity
 
 <div class="activity-card border-pink-400">
-                    <h2 class="text-3xl font-bold text-center text-pink-400 mb-6">Match the word halves</h2>
+                    <h2 class="text-3xl font-bold text-center text-pink-400 mb-6">Ex 6 - Match the words with the pictures</h2>
                     <div class="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <img src="https://johanka2014.github.io/i_wonder_2/mod_5/33.png" alt="‘Match the word halves" class="rounded-2xl shadow-md w-full">
+                            <img src="https://johanka2014.github.io/i_wonder_2/Revision_1/4.png" alt="‘Match the words with the pictures" class="rounded-2xl shadow-md w-full">
                         </div>
                         <div class="text-center">
                             <p class="text-xl mb-6 text-gray-600">Match the word halves</p>
-                            <a href="https://learningapps.org/watch?v=pz93x4tkj26" target="_blank" rel="noopener noreferrer" class="nav-button bg-pink-400 hover:bg-pink-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                            <a href="https://wordwall.net/resource/106913268" target="_blank" rel="noopener noreferrer" class="nav-button bg-pink-400 hover:bg-pink-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
                                 Play on LearningApps!
                             </a>
                         </div>
@@ -49,12 +51,12 @@ tile with external link
 
 song
 
-<div class="activity-card border-purple-500">
-                    <h2 class="text-3xl font-bold text-center text-purple-500 mb-6">Can I play with you? Song</h2>
+<div class="activity-card border-grey-500">
+
                     <div class="flex flex-col items-center gap-6">
-                        <img src="https://johanka2014.github.io/i_wonder_2/mod_3/room_song.png" alt="Can I play with you? Song" class="rounded-2xl shadow-md w-full max-w-2xl">
-                        <p class="text-lg text-gray-600">Click play to listen to the song!</p>
-                        <audio controls src="https://johanka2014.github.io/i_wonder_2/mod_5/1_51_iwonder_2_song_ex9_p63" class="w-full max-w-md">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/6.png" alt="What's in the bag?" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-gray-600">Click play to listen</p>
+                        <audio controls src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/22_Pista_22.avi" class="w-full max-w-md">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
@@ -156,3 +158,6 @@ DUAL COLUMNS AND AUDIO
  
 
 
+
+
+1016

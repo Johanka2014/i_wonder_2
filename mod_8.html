@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iWonder - Module 8: Seasons</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.5s ease;
+        }
+        .title-font {
+            font-family: 'Balsamiq Sans', cursive;
+        }
+        .activity-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 1.25rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            border: 4px solid transparent;
+            overflow: hidden;
+            width: 100%;
+        }
+        @media (min-width: 640px) {
+            .activity-card {
+                padding: 2rem;
+                border-radius: 2rem;
+            }
+        }
+        .activity-card:hover {
+            transform: translateY(-3px);
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hide all sections by default */
+        .content-section {
+            display: none;
+        }
+        /* Show the active section */
+        .content-section.active {
+            display: block;
+        }
+
+        /* Dynamic Seasonal Background themes */
+        .theme-spring { background-color: #F0FDF4; } /* Green 50 */
+        .theme-summer { background-color: #FEFCE8; } /* Yellow 50 */
+        .theme-autumn { background-color: #FFF7ED; } /* Orange 50 */
+        .theme-winter { background-color: #F0F9FF; } /* Blue 50 */
+    </style>
+</head>
+<body class="text-gray-800 theme-spring">
+
+<!-- Header -->
+<header id="main-header" class="bg-emerald-500 p-6 text-center text-white rounded-b-3xl shadow-lg transition-colors duration-500">
+    <h1 class="text-4xl md:text-6xl title-font">Module 8: Seasons</h1>
+    <p class="mt-2 text-lg">Months, Weather, and Seasonal Fun!</p>
+    <div class="flex justify-center gap-2 mt-4 flex-wrap">
+        <button onclick="setTheme('spring', 'bg-emerald-500')" class="bg-emerald-600 text-xs px-3 py-1.5 rounded-full font-bold shadow hover:bg-emerald-700 transition">🌸 Spring Theme</button>
+        <button onclick="setTheme('summer', 'bg-amber-400')" class="bg-amber-500 text-xs px-3 py-1.5 rounded-full font-bold shadow hover:bg-amber-600 transition">☀️ Summer Theme</button>
+        <button onclick="setTheme('autumn', 'bg-orange-500')" class="bg-orange-600 text-xs px-3 py-1.5 rounded-full font-bold shadow hover:bg-orange-700 transition">🍁 Autumn Theme</button>
+        <button onclick="setTheme('winter', 'bg-sky-500')" class="bg-sky-600 text-xs px-3 py-1.5 rounded-full font-bold shadow hover:bg-sky-700 transition">❄️ Winter Theme</button>
+    </div>
+</header>
+
+<!-- Navigation -->
+<nav class="p-6 flex flex-wrap justify-center gap-3 md:gap-4">
+    <button onclick="showSection('vocabulary')" class="nav-button active bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg" id="nav-vocab">📅 Vocab & Months</button>
+    <button onclick="showSection('story')" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg" id="nav-story">🌻 Story Time</button>
+    <button onclick="showSection('grammar')" class="nav-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full text-lg" id="nav-grammar">🤔 Grammar Talk</button>
+    <button onclick="showSection('science')" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full text-lg" id="nav-science">🌍 Weather & CLIL</button>
+    <button onclick="showSection('sounds')" class="nav-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full text-lg" id="nav-sounds">🔊 Sounds (ee/ea)</button>
+</nav>
+
+<main class="container mx-auto p-4 md:p-8">
+
+    <!-- Vocabulary Section -->
+    <section id="vocabulary" class="content-section active">
+        <div class="space-y-8">
+            <!-- Months Season Sorter Game -->
+            <div class="activity-card border-emerald-400">
+                <h2 class="text-3xl font-bold text-center text-emerald-600 mb-2">Month Sorter!</h2>
+                <p class="text-center text-gray-600 mb-6">Click a month below, then click the correct season basket!</p>
+
+                <div id="month-pool" class="flex flex-wrap justify-center gap-2 mb-6 p-4 bg-gray-50 rounded-2xl border border-gray-200">
+                    <!-- Dynamic Month buttons -->
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div idbasket="WINTER" onclick="dropMonth('WINTER')" class="bg-blue-100 hover:bg-blue-200 transition p-4 rounded-2xl border-2 border-blue-300 text-center cursor-pointer min-h-[140px] flex flex-col justify-between">
+                        <span class="font-bold text-blue-700 text-lg">❄️ WINTER</span>
+                        <div class="text-xs text-blue-900 mt-2 space-y-1" id="basket-WINTER"></div>
+                    </div>
+                    <div idbasket="SPRING" onclick="dropMonth('SPRING')" class="bg-green-100 hover:bg-green-200 transition p-4 rounded-2xl border-2 border-green-300 text-center cursor-pointer min-h-[140px] flex flex-col justify-between">
+                        <span class="font-bold text-green-700 text-lg">🌸 SPRING</span>
+                        <div class="text-xs text-green-900 mt-2 space-y-1" id="basket-SPRING"></div>
+                    </div>
+                    <div idbasket="SUMMER" onclick="dropMonth('SUMMER')" class="bg-yellow-100 hover:bg-yellow-200 transition p-4 rounded-2xl border-2 border-yellow-300 text-center cursor-pointer min-h-[140px] flex flex-col justify-between">
+                        <span class="font-bold text-yellow-700 text-lg">☀️ SUMMER</span>
+                        <div class="text-xs text-yellow-900 mt-2 space-y-1" id="basket-SUMMER"></div>
+                    </div>
+                    <div idbasket="AUTUMN" onclick="dropMonth('AUTUMN')" class="bg-orange-100 hover:bg-orange-200 transition p-4 rounded-2xl border-2 border-orange-300 text-center cursor-pointer min-h-[140px] flex flex-col justify-between">
+                        <span class="font-bold text-orange-700 text-lg">🍁 AUTUMN</span>
+                        <div class="text-xs text-orange-900 mt-2 space-y-1" id="basket-AUTUMN"></div>
+                    </div>
+                </div>
+                <div id="sorter-feedback" class="text-center mt-6 text-xl font-bold text-emerald-600 h-8"></div>
+            </div>
+
+            <!-- Listen and repeat with TTS -->
+            <div class="activity-card border-emerald-400">
+                <h2 class="text-3xl font-bold text-center text-emerald-600 mb-2">Listen & Learn</h2>
+                <p class="text-center text-gray-600 mb-6">Click to listen to the weather, seasons and seasonal activities!</p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                    <button onclick="speakText('Winter')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">❄️</span>
+                        <span>Winter</span>
+                    </button>
+                    <button onclick="speakText('Spring')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">🌸</span>
+                        <span>Spring</span>
+                    </button>
+                    <button onclick="speakText('Summer')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">☀️</span>
+                        <span>Summer</span>
+                    </button>
+                    <button onclick="speakText('Autumn')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">🍁</span>
+                        <span>Autumn</span>
+                    </button>
+                    <button onclick="speakText('go camping')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">🏕️</span>
+                        <span>go camping</span>
+                    </button>
+                    <button onclick="speakText('collect shells')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">🐚</span>
+                        <span>collect shells</span>
+                    </button>
+                    <button onclick="speakText('collect leaves')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">🍂</span>
+                        <span>collect leaves</span>
+                    </button>
+                    <button onclick="speakText('paint pumpkins')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">🎃</span>
+                        <span>paint pumpkins</span>
+                    </button>
+                    <button onclick="speakText('pick flowers')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">💐</span>
+                        <span>pick flowers</span>
+                    </button>
+                    <button onclick="speakText('ice skate')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">⛸️</span>
+                        <span>ice skate</span>
+                    </button>
+                    <button onclick="speakText('go skiing')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">⛷️</span>
+                        <span>go skiing</span>
+                    </button>
+                    <button onclick="speakText('have picnics')" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 font-semibold flex flex-col items-center gap-2">
+                        <span class="text-3xl">🧺</span>
+                        <span>have picnics</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="content-section">
+        <div class="space-y-8">
+            <div class="activity-card border-blue-400">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Our Sunflowers! 🌻</h2>
+                <div class="bg-blue-50 p-6 rounded-xl mb-6 text-center">
+                    <p class="text-lg leading-relaxed max-w-2xl mx-auto mb-4">
+                        "Come on, children! It's spring. Time to plant our sunflower seeds!" says Miss.
+                        The sunflowers grow tall in summer!
+                        In autumn, they harvest the seeds. But look! Cody didn't grow a sunflower...
+                        <strong>It's a tomato plant!</strong> "It's OK, Miss! I like eating tomatoes!" 🍅
+                    </p>
+                    <button onclick="speakText('Come on children. Its spring. Time to plant our sunflower seeds. Sunflowers grow tall in summer. In autumn we take the seeds. Oh dear, Cody, its not a sunflower, its a tomato plant!')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full text-sm inline-flex items-center gap-2">
+                        🔊 Listen to Story
+                    </button>
+                </div>
+            </div>
+
+            <div class="activity-card border-blue-400">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Story True or False</h2>
+                <div id="story-quiz-container" class="space-y-4 max-w-xl mx-auto">
+                    <!-- Questions injected dynamically -->
+                </div>
+                <div id="story-feedback" class="text-center font-bold text-xl mt-4 h-8 text-blue-600"></div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+        </div>
+    </section>
+
+    <!-- Grammar Section -->
+    <section id="grammar" class="content-section">
+        <div class="space-y-8">
+            <div class="activity-card border-purple-400">
+                <h2 class="text-3xl font-bold text-center text-purple-600 mb-6">My Favourite Season</h2>
+                <div class="text-center mb-6 bg-purple-100 p-4 rounded-xl max-w-2xl mx-auto">
+                    <p class="text-lg text-purple-800"><strong>Grammar Pattern:</strong></p>
+                    <p class="text-lg font-bold">"What's your favourite season?" -> "Summer."</p>
+                    <p class="text-lg font-bold">"Why?" -> "Because I like going camping!"</p>
+                </div>
+
+                <!-- Interactive Phrase Builder -->
+                <div class="max-w-xl mx-auto bg-purple-50 p-6 rounded-2xl border border-purple-200">
+                    <h3 class="text-xl font-bold text-purple-700 mb-4 text-center">Interactive Speaking Builder</h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">1. Choose a Season:</label>
+                            <select id="build-season" onchange="updatePhrase()" class="w-full p-2 border border-purple-300 rounded-md bg-white font-semibold text-purple-800">
+                                <option value="spring">Spring 🌸</option>
+                                <option value="summer">Summer ☀️</option>
+                                <option value="autumn">Autumn 🍁</option>
+                                <option value="winter">Winter ❄️</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">2. Choose an Activity:</label>
+                            <select id="build-activity" onchange="updatePhrase()" class="w-full p-2 border border-purple-300 rounded-md bg-white font-semibold text-purple-800">
+                                <option value="having picnics">having picnics 🧺</option>
+                                <option value="going camping">going camping 🏕️</option>
+                                <option value="collecting shells">collecting shells 🐚</option>
+                                <option value="collecting leaves">collecting leaves 🍂</option>
+                                <option value="painting pumpkins">painting pumpkins 🎃</option>
+                                <option value="going skiing">going skiing ⛷️</option>
+                                <option value="ice skating">ice skating ⛸️</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border-2 border-purple-300 text-center">
+                            <p class="text-sm text-gray-500">Your Sentence:</p>
+                            <p id="built-sentence" class="text-xl font-bold text-purple-900 mt-1">"My favourite season is spring because I like having picnics."</p>
+                        </div>
+
+                        <div class="text-center">
+                            <button onclick="speakBuiltPhrase()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-6 rounded-full inline-flex items-center gap-2 shadow transition">
+                                🗣️ Read Out Loud
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Birthday calendar question -->
+            <div class="activity-card border-purple-400">
+                <h2 class="text-3xl font-bold text-center text-purple-600 mb-4">What Month is it?</h2>
+                <p class="text-center text-gray-600 mb-6">Read the riddle and type the month name! (Hint: capitalize the first letter)</p>
+
+                <div class="max-w-xl mx-auto space-y-4">
+                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <span class="font-semibold text-gray-800">1. It is before January, but after November:</span>
+                        <div class="flex gap-2">
+                            <input type="text" id="riddle-0" placeholder="Month..." class="p-2 border border-purple-300 rounded-md font-bold text-center w-36">
+                            <button onclick="checkRiddle(0, 'December')" class="bg-purple-500 text-white px-4 py-2 rounded-md font-bold">Check</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <span class="font-semibold text-gray-800">2. It is after April, but before June:</span>
+                        <div class="flex gap-2">
+                            <input type="text" id="riddle-1" placeholder="Month..." class="p-2 border border-purple-300 rounded-md font-bold text-center w-36">
+                            <button onclick="checkRiddle(1, 'May')" class="bg-purple-500 text-white px-4 py-2 rounded-md font-bold">Check</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+        </div>
+    </section>
+
+    <!-- Science / CLIL Section -->
+    <section id="science" class="content-section">
+        <div class="space-y-8">
+            <div class="activity-card border-teal-400">
+                <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Match the Weather! ⛅</h2>
+                <p class="text-center text-gray-600 mb-6">Drag or select the correct weather matches for each illustration.</p>
+
+                <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                    <div class="bg-teal-50 p-4 rounded-xl border border-teal-100 flex flex-col items-center gap-3">
+                        <span class="text-6xl">🌬️🍃</span>
+                        <span class="font-bold text-lg text-teal-900">Tree is swaying and leaves are flying!</span>
+                        <select onchange="checkWeatherItem(this, 'windy')" class="w-full p-2 border border-teal-300 rounded-md font-semibold bg-white">
+                            <option value="">What is the weather like?</option>
+                            <option value="windy">It's windy.</option>
+                            <option value="sunny">It's sunny.</option>
+                            <option value="rainy">It's rainy.</option>
+                            <option value="snowy">It's snowy.</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-teal-50 p-4 rounded-xl border border-teal-100 flex flex-col items-center gap-3">
+                        <span class="text-6xl">☔🌧️</span>
+                        <span class="font-bold text-lg text-teal-900">Get your umbrella, clouds are gray!</span>
+                        <select onchange="checkWeatherItem(this, 'rainy')" class="w-full p-2 border border-teal-300 rounded-md font-semibold bg-white">
+                            <option value="">What is the weather like?</option>
+                            <option value="windy">It's windy.</option>
+                            <option value="sunny">It's sunny.</option>
+                            <option value="rainy">It's rainy.</option>
+                            <option value="snowy">It's snowy.</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-teal-50 p-4 rounded-xl border border-teal-100 flex flex-col items-center gap-3">
+                        <span class="text-6xl">☀️🕶️</span>
+                        <span class="font-bold text-lg text-teal-900">Sky is bright and hot at the beach!</span>
+                        <select onchange="checkWeatherItem(this, 'sunny')" class="w-full p-2 border border-teal-300 rounded-md font-semibold bg-white">
+                            <option value="">What is the weather like?</option>
+                            <option value="windy">It's windy.</option>
+                            <option value="sunny">It's sunny.</option>
+                            <option value="rainy">It's rainy.</option>
+                            <option value="snowy">It's snowy.</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-teal-50 p-4 rounded-xl border border-teal-100 flex flex-col items-center gap-3">
+                        <span class="text-6xl">❄️☃️</span>
+                        <span class="font-bold text-lg text-teal-900">Time to make a snowman in the yard!</span>
+                        <select onchange="checkWeatherItem(this, 'snowy')" class="w-full p-2 border border-teal-300 rounded-md font-semibold bg-white">
+                            <option value="">What is the weather like?</option>
+                            <option value="windy">It's windy.</option>
+                            <option value="sunny">It's sunny.</option>
+                            <option value="rainy">It's rainy.</option>
+                            <option value="snowy">It's snowy.</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+        </div>
+    </section>
+
+    <!-- Sounds Section -->
+    <section id="sounds" class="content-section">
+        <div class="space-y-8">
+            <!-- ee vs ea sorting maze -->
+            <div class="activity-card border-pink-400">
+                <h2 class="text-3xl font-bold text-center text-pink-600 mb-2">Double 'ee' vs 'ea'!</h2>
+                <p class="text-center text-gray-600 mb-6">Select the correct spelling letters for each word!</p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
+                    <div class="bg-pink-50 p-4 rounded-xl border border-pink-100 flex flex-col items-center gap-2">
+                        <span class="text-4xl">🐝</span>
+                        <span class="font-bold text-lg text-gray-800">b_ _</span>
+                        <div class="flex gap-2 w-full">
+                            <button onclick="checkEeEa(this, 'ee', 'ee')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ee</button>
+                            <button onclick="checkEeEa(this, 'ea', 'ee')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ea</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-pink-50 p-4 rounded-xl border border-pink-100 flex flex-col items-center gap-2">
+                        <span class="text-4xl">🍁</span>
+                        <span class="font-bold text-lg text-gray-800">l_ _ f</span>
+                        <div class="flex gap-2 w-full">
+                            <button onclick="checkEeEa(this, 'ee', 'ea')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ee</button>
+                            <button onclick="checkEeEa(this, 'ea', 'ea')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ea</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-pink-50 p-4 rounded-xl border border-pink-100 flex flex-col items-center gap-2">
+                        <span class="text-4xl">👑🐝</span>
+                        <span class="font-bold text-lg text-gray-800">qu_ _ n</span>
+                        <div class="flex gap-2 w-full">
+                            <button onclick="checkEeEa(this, 'ee', 'ee')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ee</button>
+                            <button onclick="checkEeEa(this, 'ea', 'ee')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ea</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-pink-50 p-4 rounded-xl border border-pink-100 flex flex-col items-center gap-2">
+                        <span class="text-4xl">🛫👋</span>
+                        <span class="font-bold text-lg text-gray-800">l_ _ ve</span>
+                        <div class="flex gap-2 w-full">
+                            <button onclick="checkEeEa(this, 'ee', 'ea')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ee</button>
+                            <button onclick="checkEeEa(this, 'ea', 'ea')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ea</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-pink-50 p-4 rounded-xl border border-pink-100 flex flex-col items-center gap-2">
+                        <span class="text-4xl">🌻🌱</span>
+                        <span class="font-bold text-lg text-gray-800">s_ _ ds</span>
+                        <div class="flex gap-2 w-full">
+                            <button onclick="checkEeEa(this, 'ee', 'ee')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ee</button>
+                            <button onclick="checkEeEa(this, 'ea', 'ee')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ea</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-pink-50 p-4 rounded-xl border border-pink-100 flex flex-col items-center gap-2">
+                        <span class="text-4xl">🗓️🍂</span>
+                        <span class="font-bold text-lg text-gray-800">s_ _ son</span>
+                        <div class="flex gap-2 w-full">
+                            <button onclick="checkEeEa(this, 'ee', 'ea')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ee</button>
+                            <button onclick="checkEeEa(this, 'ea', 'ea')" class="flex-1 bg-white border border-pink-300 text-pink-700 py-1.5 rounded-lg hover:bg-pink-100 font-bold transition">ea</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Betty Bee & Shelly Sheep Story Blanks -->
+            <div class="activity-card border-pink-400">
+                <h2 class="text-3xl font-bold text-center text-pink-600 mb-6">Betty Bee & Shelly Sheep 🐑🐝</h2>
+                <p class="text-center text-gray-600 mb-6">Choose the correct words to complete the beach adventure!</p>
+
+                <div class="bg-pink-50 p-6 md:p-8 rounded-xl border border-pink-200 text-base md:text-lg text-gray-800 leading-loose max-w-3xl mx-auto shadow-sm">
+                    <p class="mb-4">
+                        Betty Bee and Shelly
+                        <select id="beach-0" class="border-b-2 border-pink-400 bg-transparent font-bold text-pink-700 focus:border-pink-600 outline-none">
+                            <option value="">...</option>
+                            <option value="sheep">sheep</option>
+                            <option value="sleep">sleep</option>
+                        </select>
+                        are friends.
+                    </p>
+
+                    <p class="mb-4">
+                        Betty Bee has got a hive in a big
+                        <select id="beach-1" class="border-b-2 border-pink-400 bg-transparent font-bold text-pink-700 focus:border-pink-600 outline-none">
+                            <option value="">...</option>
+                            <option value="tree">tree</option>
+                            <option value="feet">feet</option>
+                        </select>.
+                    </p>
+
+                    <p class="mb-4">They play and dance all day under Betty Bee's tree.</p>
+
+                    <p class="mb-4">'Let's go to the sea!' says Shelly Sheep.</p>
+
+                    <p class="mb-4">
+                        So they leave the tree and cross a big
+                        <select id="beach-2" class="border-b-2 border-pink-400 bg-transparent font-bold text-pink-700 focus:border-pink-600 outline-none">
+                            <option value="">...</option>
+                            <option value="street">street</option>
+                            <option value="sleep">sleep</option>
+                        </select>.
+                    </p>
+
+                    <p class="mb-4">
+                        'Look, the sea!' says Shelly Sheep and puts her
+                        <select id="beach-3" class="border-b-2 border-pink-400 bg-transparent font-bold text-pink-700 focus:border-pink-600 outline-none">
+                            <option value="">...</option>
+                            <option value="feet">feet</option>
+                            <option value="tree">tree</option>
+                        </select>
+                        in the water.
+                    </p>
+
+                    <p class="mb-4">'Let's swim!' she says to Betty Bee. 'I can't swim,' says Betty Bee.</p>
+
+                    <p class="mb-4">So Shelly Sheep finds a leaf for Betty Bee to sit on. 'This is fun!' says Betty Bee.</p>
+
+                    <p class="mb-4">
+                        'Let's
+                        <select id="beach-4" class="border-b-2 border-pink-400 bg-transparent font-bold text-pink-700 focus:border-pink-600 outline-none">
+                            <option value="">...</option>
+                            <option value="keep">keep</option>
+                            <option value="sleep">sleep</option>
+                        </select>
+                        the leaf and come back next week.'</p>
+
+                    <p class="mb-4">
+                        Later, they go home and
+                        <select id="beach-5" class="border-b-2 border-pink-400 bg-transparent font-bold text-pink-700 focus:border-pink-600 outline-none">
+                            <option value="">...</option>
+                            <option value="sleep">sleep</option>
+                            <option value="keep">keep</option>
+                        </select>
+                        under Betty Bee's tree.
+                    </p>
+
+                    <div class="text-center mt-6">
+                        <button onclick="checkBeachAdventure()" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full inline-flex items-center gap-2 shadow">
+                            Check Beach Story 🏖️
+                        </button>
+                    </div>
+                    <div id="beach-feedback" class="text-center font-bold text-xl mt-4 h-8 text-pink-600"></div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Set dynamic seasonal layout theme
+    window.setTheme = function(season, headerBgClass) {
+        document.body.className = "text-gray-800 transition-colors duration-500 theme-" + season;
+        const header = document.getElementById('main-header');
+        header.className = `${headerBgClass} p-6 text-center text-white rounded-b-3xl shadow-lg transition-colors duration-500`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Navigation Logic ---
+        window.showSection = function(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            const el = document.getElementById(sectionId);
+            if (el) {
+                el.classList.add('active');
+            }
+            const btn = document.querySelector(`button[onclick="showSection('${sectionId}')"]`);
+            if (btn) {
+                btn.classList.add('active');
+            }
+            window.scrollTo(0, 0);
+
+            // Auto update theme depending on tab to keep it visually playful!
+            if(sectionId === 'vocabulary') setTheme('spring', 'bg-emerald-500');
+            if(sectionId === 'story') setTheme('autumn', 'bg-orange-500');
+            if(sectionId === 'grammar') setTheme('summer', 'bg-amber-400');
+            if(sectionId === 'science') setTheme('winter', 'bg-sky-500');
+        }
+
+        // --- TTS Speech Simulation ---
+        window.speakText = function(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // stop current sound
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.85; // slightly slower for children
+                utterance.pitch = 1.1; // friendly tone
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Audio playback isn't supported in your browser.");
+            }
+        }
+
+        // --- Month Season Sorter Game ---
+        const monthsData = [
+            { name: "December", season: "WINTER" },
+            { name: "January", season: "WINTER" },
+            { name: "February", season: "WINTER" },
+            { name: "March", season: "SPRING" },
+            { name: "April", season: "SPRING" },
+            { name: "May", season: "SPRING" },
+            { name: "June", season: "SUMMER" },
+            { name: "July", season: "SUMMER" },
+            { name: "August", season: "SUMMER" },
+            { name: "September", season: "AUTUMN" },
+            { name: "October", season: "AUTUMN" },
+            { name: "November", season: "AUTUMN" }
+        ];
+
+        let activeMonth = null;
+        const monthPool = document.getElementById('month-pool');
+
+        // Render shuffle pool
+        function initMonths() {
+            monthPool.innerHTML = "";
+            const shuffled = [...monthsData].sort(() => Math.random() - 0.5);
+            shuffled.forEach(m => {
+                const btn = document.createElement('button');
+                btn.className = "bg-white border-2 border-emerald-400 text-emerald-800 font-bold px-4 py-2 rounded-xl shadow-sm transition hover:bg-emerald-50";
+                btn.innerText = m.name;
+                btn.onclick = () => selectMonth(btn, m);
+                monthPool.appendChild(btn);
+            });
+        }
+        initMonths();
+
+        function selectMonth(btn, monthObj) {
+            // Remove previous selected border styling
+            const btns = monthPool.querySelectorAll('button');
+            btns.forEach(b => b.className = "bg-white border-2 border-emerald-400 text-emerald-800 font-bold px-4 py-2 rounded-xl shadow-sm transition hover:bg-emerald-50");
+
+            activeMonth = { element: btn, data: monthObj };
+            btn.className = "bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl shadow-md ring-4 ring-emerald-300";
+            speakText(monthObj.name);
+        }
+
+        window.dropMonth = function(targetSeason) {
+            const feedback = document.getElementById('sorter-feedback');
+            if (!activeMonth) {
+                feedback.textContent = "Select a month first! 👇";
+                feedback.className = "text-center mt-6 text-xl font-bold text-red-500 h-8";
+                return;
+            }
+
+            if (activeMonth.data.season === targetSeason) {
+                // Correct!
+                const basket = document.getElementById(`basket-${targetSeason}`);
+                const span = document.createElement('span');
+                span.className = "inline-block bg-white text-gray-800 border px-2 py-0.5 rounded-full m-1 font-bold animate-bounce";
+                span.innerText = activeMonth.data.name;
+                basket.appendChild(span);
+
+                activeMonth.element.remove(); // Remove from pool
+                activeMonth = null;
+
+                feedback.textContent = "Perfect! Keep sorting! 🎉";
+                feedback.className = "text-center mt-6 text-xl font-bold text-green-500 h-8";
+                speakText("Excellent!");
+
+                // Check if finished
+                if (monthPool.children.length === 0) {
+                    feedback.textContent = "Congratulations! You sorted all months! 🌟";
+                    feedback.className = "text-center mt-6 text-2xl font-bold text-emerald-600 h-8";
+                }
+            } else {
+                // Incorrect
+                feedback.textContent = "Oops! Try another season!";
+                feedback.className = "text-center mt-6 text-xl font-bold text-red-500 h-8";
+                speakText("Try again.");
+            }
+        }
+
+        // --- Story True/False ---
+        const storyQuestions = [
+            { q: "Miss says: Time to plant our sunflower seeds in spring.", ans: true },
+            { q: "Sunflowers grow tall in winter.", ans: false },
+            { q: "Elsa likes eating sunflower seeds.", ans: true },
+            { q: "Cody planted a tomato plant by mistake.", ans: true },
+            { q: "We take seeds from the sunflowers in autumn.", ans: true }
+        ];
+
+        const storyContainer = document.getElementById('story-quiz-container');
+        if (storyContainer) {
+            storyQuestions.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = "bg-white p-4 rounded-xl border border-blue-100 flex flex-col sm:flex-row items-center justify-between gap-4";
+                div.innerHTML = `
+                        <span class="font-bold text-gray-800 text-left">${idx + 1}. ${q.q}</span>
+                        <div class="flex gap-2 shrink-0">
+                            <button onclick="checkStoryQuiz(this, true, ${q.ans})" class="bg-green-100 text-green-800 px-4 py-1.5 rounded-lg font-bold hover:bg-green-200 transition">YES ✔️</button>
+                            <button onclick="checkStoryQuiz(this, false, ${q.ans})" class="bg-red-100 text-red-800 px-4 py-1.5 rounded-lg font-bold hover:bg-red-200 transition">NO ❌</button>
+                        </div>
+                    `;
+                storyContainer.appendChild(div);
+            });
+
+            window.checkStoryQuiz = function(btn, choice, correct) {
+                const parent = btn.parentElement;
+                const buttons = parent.querySelectorAll('button');
+                buttons.forEach(b => b.disabled = true);
+
+                if (choice === correct) {
+                    btn.className = "bg-green-500 text-white px-4 py-1.5 rounded-lg font-bold";
+                    speakText("Yes!");
+                } else {
+                    btn.className = "bg-red-500 text-white px-4 py-1.5 rounded-lg font-bold";
+                    speakText("No.");
+                    // Highlight the correct one
+                    buttons.forEach(b => {
+                        if((b.innerText.includes("YES") && correct) || (b.innerText.includes("NO") && !correct)) {
+                            b.className = "bg-green-500 text-white px-4 py-1.5 rounded-lg font-bold";
+                        }
+                    });
+                }
+            }
+        }
+
+        // --- Phrase Builder ---
+        window.updatePhrase = function() {
+            const season = document.getElementById('build-season').value;
+            const activity = document.getElementById('build-activity').value;
+            const sentence = document.getElementById('built-sentence');
+            sentence.innerText = `"My favourite season is ${season} because I like ${activity}."`;
+        }
+
+        window.speakBuiltPhrase = function() {
+            const text = document.getElementById('built-sentence').innerText;
+            speakText(text);
+        }
+
+        // --- Birthday Riddle Checks ---
+        window.checkRiddle = function(index, correctAns) {
+            const input = document.getElementById(`riddle-${index}`);
+            const btn = input.nextElementSibling;
+            if (input.value.trim() === correctAns) {
+                input.className = "p-2 border-2 border-green-500 bg-green-50 text-green-800 rounded-md font-bold text-center w-36";
+                btn.innerText = "✔️";
+                btn.className = "bg-green-500 text-white px-4 py-2 rounded-md font-bold";
+                speakText("Perfect!");
+            } else {
+                input.className = "p-2 border-2 border-red-400 bg-red-50 text-red-800 rounded-md font-bold text-center w-36";
+                speakText("Check spelling.");
+                setTimeout(() => {
+                    input.className = "p-2 border border-purple-300 rounded-md font-bold text-center w-36";
+                }, 1500);
+            }
+        }
+
+        // --- Weather Dropdowns ---
+        window.checkWeatherItem = function(select, correctAns) {
+            if (select.value === correctAns) {
+                select.className = "w-full p-2 border-4 border-teal-500 bg-teal-50 rounded-md font-bold text-teal-800 outline-none";
+                speakText(`It's ${correctAns}.`);
+            } else {
+                select.className = "w-full p-2 border-4 border-red-400 bg-red-50 rounded-md font-bold text-red-800 outline-none animate-shake";
+                setTimeout(() => {
+                    select.className = "w-full p-2 border border-teal-300 rounded-md font-semibold bg-white outline-none";
+                    select.value = "";
+                }, 1200);
+            }
+        }
+
+        // --- Sounds Phonics check ---
+        window.checkEeEa = function(btn, selected, correct) {
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(b => b.disabled = true);
+
+            if (selected === correct) {
+                btn.className = "flex-1 bg-green-500 text-white py-1.5 rounded-lg font-bold shadow-md transform scale-105";
+                speakText("Excellent");
+            } else {
+                btn.className = "flex-1 bg-red-500 text-white py-1.5 rounded-lg font-bold";
+                buttons.forEach(b => {
+                    if(b !== btn) b.className = "flex-1 bg-green-500 text-white py-1.5 rounded-lg font-bold shadow-md";
+                });
+            }
+        }
+
+        // --- Beach Adventure (Story gaps) ---
+        window.checkBeachAdventure = function() {
+            const correctAnswers = ["sheep", "tree", "street", "feet", "keep", "sleep"];
+            const feedback = document.getElementById('beach-feedback');
+            let allCorrect = true;
+
+            correctAnswers.forEach((ans, idx) => {
+                const select = document.getElementById(`beach-${idx}`);
+                if (select.value === ans) {
+                    select.className = "border-b-2 border-green-500 text-green-600 bg-green-50 font-bold outline-none";
+                } else {
+                    select.className = "border-b-2 border-red-500 text-red-600 bg-red-50 font-bold outline-none";
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                feedback.textContent = "Super! You helped Shelly Sheep and Betty Bee! 🌊🌻";
+                feedback.className = "text-center font-bold text-xl mt-4 h-8 text-green-600";
+                speakText("Congratulations!");
+            } else {
+                feedback.textContent = "Check the red slots and try again!";
+                feedback.className = "text-center font-bold text-xl mt-4 h-8 text-red-500";
+            }
+        }
+
+    });
+</script>
+</body>
+</html>
